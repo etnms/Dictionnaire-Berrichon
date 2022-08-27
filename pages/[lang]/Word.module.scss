@@ -1,0 +1,6 @@
+@use "../../styles/mixin";
+
+.page {
+    height: 100vh;
+    @include mixin.flex-center;
+}

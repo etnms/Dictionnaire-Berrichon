@@ -1,0 +1,22 @@
+@use "../styles/mixin";
+@use "../styles/variables";
+
+.wrapper-search {
+    @include mixin.flex-center;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.search-bar {
+    width: 40vw;
+    font-size: 1.3rem;
+    padding: 0.2rem;
+    border-radius: 25px;
+}
+
+.btn-search {
+    @include mixin.button;
+    background-color: variables.$blue-yonder;
+    color: white;
+
+}

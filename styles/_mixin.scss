@@ -1,0 +1,16 @@
+@use "./variables";
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin button {
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+  }
