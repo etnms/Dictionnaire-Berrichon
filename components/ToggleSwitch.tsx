@@ -1,22 +1,20 @@
 import React from "react";
-import { useAppDispatch } from "../app/hook";
+import { useAppDispatch, useAppSelector } from "../app/hook";
 import styles from "./ToggleSwitch.module.scss";
-import {changeLang} from "../features/changeLangSlice";
-
+import { changeLang } from "../features/changeLangSlice";
 
 const ToggleSwitch = () => {
-
   const dispatch = useAppDispatch();
+  const lang = useAppSelector((state) => state.changeLang.value);
   function handleSelect(e: React.ChangeEvent<HTMLSelectElement>) {
-    const value = e.target.value;
     dispatch(changeLang(e.target.value));
   }
 
   return (
     <div>
-      <select className={styles.select} onChange={handleSelect}>
-        <option value="fr">Français-Berrichon</option>
-        <option value="ber">Berrichon-Français</option>
+      <select className={styles.select} onChange={handleSelect} value={lang} >
+        <option value="berrichon-francais">Berrichon-Français</option>
+        <option value="francais-berrichon">Français-Berrichon</option>
       </select>
     </div>
   );

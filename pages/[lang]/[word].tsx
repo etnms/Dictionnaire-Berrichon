@@ -34,9 +34,8 @@ export default function Word(props: IWordResults) {
 
 // Get props from server side rendering
 export async function getServerSideProps(params: any) {
- // const lang = useAppSelector((state) => state.lang.value);
-  const lang ="fr";
-  const res = await fetch(`http://localhost:3000/api/${lang}/${params.query.word}` as string);
+
+  const res = await fetch(`http://localhost:3000/api/${params.query.lang}/${params.query.word}` as string);
   const words = await res.json();
 
   // return props

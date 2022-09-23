@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   connect();
   if (method === "GET") {
     try {
-      const words = await Word.find(req.query);
+      const words = await Word.find({word: req.query.word});
       res.status(200).json(words);
     } catch (err) {
       res.status(500).json(err);

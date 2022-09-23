@@ -10,12 +10,11 @@ interface IChangeLangState {
 // Define the initial state using that type
 const initialState: IChangeLangState = {
   // default value to ber
-  value: "ber",
+  value: "berrichon-francais",
 };
 
 export const changeLangSlice = createSlice({
   name: "changeLang",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     changeLang: (state, action: PayloadAction<string>) => {

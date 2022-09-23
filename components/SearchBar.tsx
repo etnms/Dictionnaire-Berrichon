@@ -16,8 +16,8 @@ function SearchBar() {
   }
 
   function searchWord() {
-    if (lang === "ber") router.push(`/berrichon/${input}`);
-    else if (lang === "fr") router.push(`/francais/${input}`);
+    if (lang === "berrichon-francais") router.push(`/berrichon-francais/${input}`);
+    else if (lang === "francais-berrichon") router.push(`/francais-berrichon/${input}`);
     else return;
   }
 
