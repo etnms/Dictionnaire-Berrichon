@@ -1,6 +1,8 @@
 @use "../../styles/mixin";
 
 .page {
-    height: 100vh;
+    padding: 0.5rem 0;
+    min-height: 100vh;
     @include mixin.flex-center;
+    flex-direction: column;
 }
