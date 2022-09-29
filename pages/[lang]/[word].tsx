@@ -1,5 +1,4 @@
 import React from "react";
-import { useAppSelector } from "../../app/hook";
 import SearchBar from "../../components/SearchBar";
 import WordDefinition from "../../components/WordDefinition";
 import { IWord } from "../../utils/types";
@@ -7,26 +6,29 @@ import styles from "./Word.module.scss";
 
 interface IWordResults {
   words: Array<IWord>;
+  similarWords: Array<IWord>;
 }
 
 export default function Word(props: IWordResults) {
-  const { words } = props;
+  const { words, similarWords } = props;
 
   return (
     <div className={styles.page}>
-      <SearchBar/>
+      <SearchBar />
       <div>
-        <ul>
-          {words.map((result: IWord) => (
-            <WordDefinition word={result.word} translation={result.translation} key={result._id} />
-          ))}
-        </ul>
+        {words.length === 0 ? (
+          <p>Aucun résultat n&apos;a été trouvé pour ce mot.</p>
+        ) : (
+          <ul>
+            {words.map((result: IWord) => (
+              <WordDefinition word={result.word} translation={result.translation} pos={result.pos} definition={result.definition} key={result._id} />
+            ))}
+          </ul>
+        )}
       </div>
       <div>
-        <span> Voir egalement</span>
-        <ul>
-          list of other words
-        </ul>
+        <h2>Voir également</h2>
+        <ul>{similarWords.map((word: IWord) => <li key={word._id}>{word.word}</li>)}</ul>
       </div>
     </div>
   );
@@ -34,12 +36,13 @@ export default function Word(props: IWordResults) {
 
 // Get props from server side rendering
 export async function getServerSideProps(params: any) {
-
-  const res = await fetch(`http://localhost:3000/api/${params.query.lang}/${params.query.word}` as string);
+  const res = await fetch(`${process.env.api}/api/${params.query.lang}/${params.query.word}` as string);
   const words = await res.json();
 
+  const similarWordsRes =  await fetch(`${process.env.api}/api/similarWords/${params.query.word}` as string);
+  const similarWords = await similarWordsRes.json();
   // return props
   return {
-    props: { words },
+    props: { words, similarWords },
   };
 }

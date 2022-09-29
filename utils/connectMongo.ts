@@ -10,6 +10,8 @@ export const connect = async () => {
   const WordSchema = new mongoose.Schema({
     word: String,
     translation: String,
+    definition: String,
+    pos: String,
   });
 
   const Word = mongoose.models.Word || mongoose.model("Word", WordSchema);
