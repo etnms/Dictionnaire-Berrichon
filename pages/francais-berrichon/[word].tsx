@@ -9,13 +9,16 @@ interface IWordResults {
   similarWords: Array<IWord>;
 }
 
+// To do : get styles and values from berrichon-francais and update this
+// Alternative: find how to do some DRI for two similar pages
+
 export default function Word(props: IWordResults) {
   const { words, similarWords } = props;
 
   return (
     <div className={styles.page}>
       <SearchBar />
-      <div>
+      <div className={styles.results}>
         {words.length === 0 ? (
           <p>Aucun résultat n&apos;a été trouvé pour ce mot.</p>
         ) : (
@@ -26,7 +29,7 @@ export default function Word(props: IWordResults) {
           </ul>
         )}
       </div>
-      <div>
+      <div className={styles["see-also"]}>
         <h2>Voir également</h2>
         <ul>{similarWords.map((word: IWord) => <li key={word._id}>{word.word}</li>)}</ul>
       </div>
@@ -36,7 +39,7 @@ export default function Word(props: IWordResults) {
 
 // Get props from server side rendering
 export async function getServerSideProps(params: any) {
-  const res = await fetch(`${process.env.api}/api/${params.query.lang}/${params.query.word}` as string);
+  const res = await fetch(`${process.env.api}/api/francais-berrichon/${params.query.word}` as string);
   const words = await res.json();
 
   const similarWordsRes =  await fetch(`${process.env.api}/api/similarWords/${params.query.word}` as string);

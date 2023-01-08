@@ -11,13 +11,13 @@ interface IWordProps {
 
 const WordDefinition = (props: IWordProps) => {
   return (
-    <div className={styles.word}>
+    <li className={styles.word}>
       <h1>
         {props.word} ({translatePOS(props.pos)}){" "}
       </h1>
       <p>Traduction: {props.translation}</p>
       {props.definition === "" ? null : <p>Définition: {props.definition} </p>}
-    </div>
+    </li>
   );
 };
 

@@ -1,6 +1,13 @@
+@use "../styles/variables";
+
 .word {
     border: 2px solid black;
     border-radius: 20px;
     min-width: 60vw;
     padding: 2rem 4rem;
+    list-style: none;
+    box-shadow: variables.$elevation;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
