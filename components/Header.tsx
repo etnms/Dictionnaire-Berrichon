@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <ul className={styles.nav}>
             <li>Dictionnaire</li>
-            <li>Source et references</li>
+            <li>Sources et references</li>
             {/*<li>Grammaire</li>*/}
         </ul>
     );
