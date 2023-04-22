@@ -10,7 +10,7 @@ interface IWordResults {
 }
 
 // To do : get styles and values from berrichon-francais and update this
-// Alternative: find how to do some DRI for two similar pages
+// Alternative: find how to do some DRY for two similar pages
 
 export default function Word(props: IWordResults) {
   const { words, similarWords } = props;
