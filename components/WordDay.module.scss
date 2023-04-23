@@ -1,6 +1,10 @@
+@use "../styles/variables";
+
 .container {
     border: 2px solid black;
     border-radius: 2rem;
     padding: 2rem 8rem;
     width: 60vw;
+    box-shadow: variables.$elevation;
+    background-color: white;
 }

@@ -7,7 +7,6 @@ import { Word } from "../../utils/model";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
 
-  
   connect();
   if (method === "GET") {
     try {
