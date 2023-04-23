@@ -10,11 +10,15 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
+    "@types/lodash": "^4.14.194",
+    "loadash": "^1.0.0",
+    "lodash": "^4.17.21",
     "mongoose": "^6.5.5",
     "natural": "^6.2.0",
     "next": "12.2.3",
     "next-redux-wrapper": "^8.0.0",
     "react": "18.2.0",
+    "react-autosuggest": "^10.1.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.2",
     "sass": "^1.54.0"
@@ -22,6 +26,7 @@
   "devDependencies": {
     "@types/node": "18.6.0",
     "@types/react": "18.0.15",
+    "@types/react-autosuggest": "^10.1.6",
     "@types/react-dom": "18.0.6",
     "eslint": "8.20.0",
     "eslint-config-next": "12.2.3",

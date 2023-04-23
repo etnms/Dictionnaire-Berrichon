@@ -15,11 +15,9 @@ function SearchBar() {
   }
 
   function searchWord() {
-    if (lang === "berrichon-francais") {
+    if (lang === "berrichon-francais" || lang === "francais-berrichon")
       router.push(`/${lang}/${input}`);
-    } else if (lang === "francais-berrichon") {
-      router.push(`/${lang}/${input}`);
-    } else return;
+    else return;
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
