@@ -4,7 +4,8 @@
 .wrapper-search {
     @include mixin.flex-center;
     flex-direction: column;
-    gap: 0.5rem;   
+    gap: 0.5rem;
+    position: relative;   
 }
 
 .search-bar {
@@ -18,6 +19,27 @@
 
 .search-bar:focus {
     box-shadow: 3px 4px 15px -7px variables.$blue-yonder;
+}
+
+.suggestion {
+    background-color: white;
+    list-style: none;
+    width: 40vw;
+    font-size: 1.3rem;
+    max-height: 40vh;
+    overflow-y: auto;
+    cursor: pointer;
+    position: absolute;
+    top: 28%;
+    border-radius: 8px;
+
+}
+.selected-suggestion {
+    padding: 0.2rem 0.5rem;
+}
+.selected-suggestion:hover {
+    background-color: variables.$blue-yonder;
+    color: white
 }
 
 .btn-search {
