@@ -14,12 +14,11 @@ const Home: NextPage = () => {
 
   const today = new Date().toLocaleDateString();
 
-
+  // Word of the day logic
   useEffect(() => {
-
     // Fetch the word of the day and update state
     async function fetchWordOfTheDay() {
-      const res: Response = await fetch(`http://localhost:3000/api/word-day` as string);
+      const res: Response = await fetch(`${process.env.NEXT_PUBLIC_API}/api/word-day` as string);
       const word: IWord = await res.json();
       // Update state and localStorage
       setWordOfTheDay(word);
@@ -40,7 +39,7 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <>
+    <div className={styles.page}>
       <Head>
         <title>Dictionaire Berrichon</title>
         <meta name="description" content="Homepage for the berrichon francais dictionnary" />
@@ -51,9 +50,8 @@ const Home: NextPage = () => {
         <Title />
         <SearchBar />
         <WordDay wordOfTheDay={wordOfTheDay} />
-
       </main>
-    </>
+    </div>
   );
 };
 

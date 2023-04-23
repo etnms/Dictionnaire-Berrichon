@@ -2,15 +2,20 @@
 @use "../../styles/variables";
 
 .page {
+    background-color: variables.$bg-second;
+}
+
+.main {
     padding: 0.5rem 0;
     min-height: 100vh;
     @include mixin.flex-center;
     flex-direction: column;
-    background-color: variables.$bg-second;
 }
 
 .list-results {
     @include mixin.flex-center;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .results {
@@ -33,4 +38,55 @@
     box-shadow: variables.$elevation-soft;
 }
 
+.title {
+    font-size: 2rem;
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.5rem;
+}
+
+// Styling link for the see also section
+
+.link>a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    position: relative;
+    color: black;
+}
+
+.link>a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 10%;
+    background-color: variables.$blue-yonder;;
+    opacity: 0;
+    border-radius: 12px;
+}
+
+
+.link>a:hover::before {
+    width: 100%;
+    opacity: 1;
+    transition: all 0.3s;
+}
+
+.link>a:visited:hover::before {
+    background-color: variables.$coquelicot;
+}
+
+.link>a:hover {
+    color: variables.$blue-yonder;
+}
+
+.link>a:visited {
+    color: variables.$coquelicot;
+}
 

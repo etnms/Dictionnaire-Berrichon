@@ -4,6 +4,7 @@
 .page {
     @include mixin.flex-center;
     flex-direction: column;
+    background-color: variables.$bg-second;
 }
 
 .paragraph {

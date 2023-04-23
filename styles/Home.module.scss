@@ -1,3 +1,10 @@
+@use "./variables";
+
+
+.page {
+  height: 100vh;
+  background-color: variables.$bg-second;
+}
 .main {
   display: flex;
   flex-direction: column;
@@ -5,4 +12,6 @@
   justify-content: center;
   height: 80vh;
   gap: 2rem;
+  background-color: variables.$bg-second;
+  
 }

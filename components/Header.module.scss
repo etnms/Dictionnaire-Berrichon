@@ -1,16 +1,27 @@
+@use "../styles/variables";
+
 .nav {
     display: flex;
     list-style: none;
+    padding: 0.5rem;
 }
 
 .nav>li {
     padding: 0.4rem;
     font-size: 1.6rem;
     position: relative;
+    z-index: 1;
 }
 
 .nav>li>a {
-    text-decoration: none; 
+    text-decoration: none;
+    color: black;
+    z-index: 1;
+}
+
+.nav>li>a:hover {
+    color: white;
+    transition: all 0.4s;
 }
 
 .nav>li>a::before {
@@ -20,12 +31,13 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
     transition: all 0.4s;
     opacity: 0;
-    border: 2px solid red;
+    background-color: variables.$blue-yonder;
     border-radius: 2px;
     transform: scale(0.6);
+    border-radius: 0.2rem;
+    z-index: -1;
 }
 
 .nav>li>a:hover::before {

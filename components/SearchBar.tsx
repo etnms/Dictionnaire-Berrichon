@@ -22,9 +22,15 @@ function SearchBar() {
     } else return;
   }
 
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === 'Enter') {
+      searchWord();
+    }
+  }
+
   return (
     <div className={styles["wrapper-search"]}>
-      <input className={styles["search-bar"]} name="main-input" onChange={(e) => handleInput(e)} />
+      <input className={styles["search-bar"]} name="main-input" onChange={(e) => handleInput(e)} onKeyDown={(e) => handleKeyDown(e)} />
       <ToggleSwitch />
       <button className={styles["btn-search"]} onClick={searchWord}>
         Chercher
