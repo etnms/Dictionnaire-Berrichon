@@ -19,15 +19,15 @@ function SearchBar() {
     setInput(e.target.value);
   }
 
-  function searchWord() {
+  function searchWord(value: string) {
     if (lang === "berrichon-francais" || lang === "francais-berrichon")
-      router.push(`/${lang}/${input}`);
+      router.push(`/${lang}/${value}`);
     else return;
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
-      searchWord();
+      searchWord(input);
     }
   }
 
@@ -73,12 +73,11 @@ function SearchBar() {
   // Fill out search bar when clicking on a suggestion
   function fillOutSearchBar(value: string) {
     (document.querySelector("input[name='main-input']") as HTMLInputElement).value = value;
-    console.log(value)
     setInput(value);
     // Reset suggestions
     setSuggestions([]);
     //Click allows for direct search
-    searchWord();
+    searchWord(value);
   }
 
   return (
@@ -92,7 +91,7 @@ function SearchBar() {
         </ul>
       )}
       <ToggleSwitch lang={lang} setLang={setLang} />
-      <button className={styles["btn-search"]} onClick={searchWord}>
+      <button className={styles["btn-search"]} onClick={() => searchWord(input)}>
         Chercher
       </button>
 
