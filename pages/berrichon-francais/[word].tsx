@@ -47,10 +47,9 @@ export default function Word(props: IWordResults) {
 
 // Get props from server side rendering
 export async function getServerSideProps(params: any) {
-  const res = await fetch(`${process.env.api}/api/berrichon-francais/${params.query.word}` as string);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/api/berrichon-francais/${params.query.word}` as string);
   const words = await res.json();
-
-  const similarWordsRes = await fetch(`${process.env.api}/api/similarWords/${params.query.word}` as string);
+  const similarWordsRes = await fetch(`${process.env.NEXT_PUBLIC_API}/api/similarWords/${params.query.word}` as string);
   const similarWords = await similarWordsRes.json();
   // return props
   return {

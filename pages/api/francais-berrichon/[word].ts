@@ -3,7 +3,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { connect } from "../../../utils/connectMongo";
 import { Word } from "../../../utils/model";
 
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
   connect();

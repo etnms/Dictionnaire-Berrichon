@@ -5,7 +5,7 @@
     @include mixin.flex-center;
     flex-direction: column;
     gap: 0.5rem;
-    position: relative;   
+    position: relative;
 }
 
 .search-bar {
@@ -32,11 +32,29 @@
     position: absolute;
     top: 28%;
     border-radius: 8px;
-
+    border: 2px solid black;
 }
+
+.suggestion {
+    &::-webkit-scrollbar {
+        width: 10px;        
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: gray;
+        border-radius: 12px;      
+    }
+
+    &::-webkit-scrollbar-track {
+        margin: 2px;
+        border-radius: 12px;
+    }
+}
+
 .selected-suggestion {
     padding: 0.2rem 0.5rem;
 }
+
 .selected-suggestion:hover {
     background-color: variables.$blue-yonder;
     color: white

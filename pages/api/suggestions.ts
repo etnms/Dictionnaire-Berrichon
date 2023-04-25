@@ -1,10 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Word } from "../../utils/model";
+import { connect } from "../../utils/connectMongo";
 
 // Suggestion function that looks through DB using a regex expression but limits results to 10 to not overload the page/users
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { method } = req;
-    console.log(req.query.word);
+    connect();
     if (method === "GET") {
         try {
             // Regex to get results for words that start with same letters as input + limit results to only 10 words. 

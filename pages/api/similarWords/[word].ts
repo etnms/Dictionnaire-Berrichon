@@ -24,6 +24,7 @@ async function findSimilarWords(input: string) {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
 
+  connect();
   if (method === "GET") {
     try {
       const words = await findSimilarWords(req.query.word as string);

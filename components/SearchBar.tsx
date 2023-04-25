@@ -2,14 +2,13 @@ import React, { useState, useEffect, useMemo } from "react";
 import styles from "./SearchBar.module.scss";
 import ToggleSwitch from "./ToggleSwitch";
 import { useRouter } from "next/router";
-import { useAppSelector } from "../app/hook";
 
 function SearchBar() {
 
   const router = useRouter();
 
+  const [lang, setLang] = useState<string>("berrichon-francais"); // default to main
   const [input, setInput] = useState<string>("");
-  const lang = useAppSelector((state) => state.changeLang.value);
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
   // limit for API call to help with debouncing
@@ -60,7 +59,7 @@ function SearchBar() {
     const debouncedFetch = debounce((searchQuery: string) => {
       fetch(`/api/suggestions?word=${searchQuery}`)
         .then((response) => response.json())
-        .then((data) => setSuggestions(data));
+        .then((data) => { console.log(data); setSuggestions(data) });
     }, 500, LIMIT);
     debouncedFetch(input);
   }, [input]);
@@ -74,6 +73,7 @@ function SearchBar() {
   // Fill out search bar when clicking on a suggestion
   function fillOutSearchBar(value: string) {
     (document.querySelector("input[name='main-input']") as HTMLInputElement).value = value;
+    console.log(value)
     setInput(value);
     // Reset suggestions
     setSuggestions([]);
@@ -91,7 +91,7 @@ function SearchBar() {
           ))}
         </ul>
       )}
-      <ToggleSwitch />
+      <ToggleSwitch lang={lang} setLang={setLang} />
       <button className={styles["btn-search"]} onClick={searchWord}>
         Chercher
       </button>

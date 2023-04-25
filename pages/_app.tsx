@@ -1,6 +1,6 @@
 import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
-import { wrapper } from "../app/store"
+
 import {useState, useEffect} from 'react';
 import Router from 'next/router';
 import Loader from '../components/Loader';
@@ -21,4 +21,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (loading? <Loader/> : <Component {...pageProps} />)
 }
 
-export default wrapper.withRedux(MyApp);
+export default MyApp;
