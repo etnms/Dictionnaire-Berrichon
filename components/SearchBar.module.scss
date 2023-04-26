@@ -8,6 +8,10 @@
     position: relative;
 }
 
+.wrapper-input {
+position: relative;
+}
+
 .search-bar {
     width: 40vw;
     font-size: 1.3rem;
@@ -30,7 +34,7 @@
     overflow-y: auto;
     cursor: pointer;
     position: absolute;
-    top: 28%;
+    top: 100%;
     border-radius: 8px;
     border: 2px solid black;
 }

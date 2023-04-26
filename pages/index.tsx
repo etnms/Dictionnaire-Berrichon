@@ -23,13 +23,14 @@ const Home: NextPage = () => {
       // Update state and localStorage
       setWordOfTheDay(word);
       localStorage.setItem("wordDay", JSON.stringify(word));
+      localStorage.setItem("date", today);
     }
 
     // Check if date or local storage is empty
    const wordDayStorage: string | null = localStorage.getItem("wordDay");
 
     if (localStorage.getItem("date") !== today || wordDayStorage === null) {
-      localStorage.setItem("date", today);
+
       fetchWordOfTheDay();
     }
     else {

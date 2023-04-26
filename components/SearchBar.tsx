@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import styles from "./SearchBar.module.scss";
 import ToggleSwitch from "./ToggleSwitch";
 import { useRouter } from "next/router";
+import Tooltip from "./Tooltip";
 
 function SearchBar() {
 
@@ -13,6 +14,9 @@ function SearchBar() {
 
   // limit for API call to help with debouncing
   const LIMIT = 10;
+
+  // Ref to use to detect outside clicks
+  const ref = useRef<HTMLDivElement>(null);
 
   // Handle input
   function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
@@ -80,16 +84,40 @@ function SearchBar() {
     searchWord(value);
   }
 
+   // Detect outside clicks
+   useEffect(() => {
+    // add event listener to detect clicks outside component
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        // clicked outside component
+        // Empty suggestion array to hide suggestions
+        setSuggestions([]);
+        console.log(ref.current);
+        console.log(event.target);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // cleanup function to remove event listener
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref]);
+
   return (
-    <div className={styles["wrapper-search"]}>
-      <input className={styles["search-bar"]} name="main-input" onChange={(e) => debouncedHandleInput(e)} onKeyDown={(e) => handleKeyDown(e)} autoComplete="off" />
-      {memoizedSuggestions.length > 1 && ( // value of 1 to hide suggestion when the result is 0 or only 1 word, which is the final result
-        <ul className={styles.suggestion}>
-          {memoizedSuggestions.map((suggestion, index) => (
-            <li key={index} onClick={() => fillOutSearchBar(suggestion)} className={styles["selected-suggestion"]}>{suggestion}</li>
-          ))}
-        </ul>
-      )}
+    <div className={styles["wrapper-search"]} ref={ref}>
+      <div className={styles["wrapper-input"]}>
+        <input className={styles["search-bar"]} name="main-input" onChange={(e) => debouncedHandleInput(e)} onKeyDown={(e) => handleKeyDown(e)} autoComplete="off" />
+        {memoizedSuggestions.length > 1 && ( // value of 1 to hide suggestion when the result is 0 or only 1 word, which is the final result
+          <ul className={styles.suggestion}>
+            {memoizedSuggestions.map((suggestion, index) => (
+              <li key={index} onClick={() => fillOutSearchBar(suggestion)} className={styles["selected-suggestion"]}>{suggestion}</li>
+            ))}
+          </ul>
+        )}
+        <Tooltip />
+      </div>
       <ToggleSwitch lang={lang} setLang={setLang} />
       <button className={styles["btn-search"]} onClick={() => searchWord(input)}>
         Chercher
