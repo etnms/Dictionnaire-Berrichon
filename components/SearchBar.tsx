@@ -18,6 +18,10 @@ function SearchBar() {
   // Ref to use to detect outside clicks
   const ref = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    setLang(sessionStorage.getItem("lang") || "berrichon-francais");
+  }, [])
+
   // Handle input
   function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
     setInput(e.target.value);
@@ -36,20 +40,23 @@ function SearchBar() {
   }
 
   // deboucing function to reduce load
-  function debounce(func: Function, wait: number, limit: number) {
+  function debounce(func: Function, wait: number, delay: number) {
     let timeout: NodeJS.Timeout;
     let counter = 0;
     return (...args: any) => {
       clearTimeout(timeout);
-      if (counter < limit) {
-        timeout = setTimeout(() => {
+      timeout = setTimeout(() => {
+        func(...args);
+        counter++;
+      }, wait);
+      if (counter < delay / wait) {
+        setTimeout(() => {
           func(...args);
           counter++;
-        }, wait);
+        }, delay);
       }
     };
   }
-
   // API call to suggestion based on input
   useEffect(() => {
     // limit API call to only input of 3 characters and more 
@@ -63,7 +70,7 @@ function SearchBar() {
     const debouncedFetch = debounce((searchQuery: string) => {
       fetch(`/api/suggestions?word=${searchQuery}`)
         .then((response) => response.json())
-        .then((data) => { console.log(data); setSuggestions(data) });
+        .then((data) => { setSuggestions(data) });
     }, 500, LIMIT);
     debouncedFetch(input);
   }, [input]);
@@ -72,7 +79,7 @@ function SearchBar() {
   const memoizedSuggestions = useMemo(() => suggestions, [suggestions]);
 
   // Debounce input
-  const debouncedHandleInput = debounce(handleInput, 350, LIMIT);
+  const debouncedHandleInput = debounce(handleInput, 350, 100);
 
   // Fill out search bar when clicking on a suggestion
   function fillOutSearchBar(value: string) {
@@ -84,16 +91,14 @@ function SearchBar() {
     searchWord(value);
   }
 
-   // Detect outside clicks
-   useEffect(() => {
+  // Detect outside clicks
+  useEffect(() => {
     // add event listener to detect clicks outside component
     const handleClickOutside = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
         // clicked outside component
         // Empty suggestion array to hide suggestions
         setSuggestions([]);
-        console.log(ref.current);
-        console.log(event.target);
       }
     };
 
@@ -118,7 +123,7 @@ function SearchBar() {
         )}
         <Tooltip />
       </div>
-      <ToggleSwitch lang={lang} setLang={setLang} />
+      <ToggleSwitch lang={lang} setLang={setLang}/>
       <button className={styles["btn-search"]} onClick={() => searchWord(input)}>
         Chercher
       </button>

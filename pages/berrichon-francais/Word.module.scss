@@ -90,3 +90,18 @@
     color: variables.$coquelicot;
 }
 
+.text-no-result {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 1rem;
+}
+
+.text-other {
+    font-size: 1.3rem;
+}
+
+.suggestions {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ToggleSwitch.module.scss";
 
 interface IToggleSwitch {
@@ -6,9 +6,17 @@ interface IToggleSwitch {
   setLang: Function;
 }
 const ToggleSwitch = (props: IToggleSwitch) => {
+
   const {lang, setLang} = props;
 
-  function handleSelect(e: React.ChangeEvent<HTMLSelectElement>) {
+  //const [lang, setLang] = useState<string>("berrichon-francais");
+
+  useEffect(() => {
+    setLang(sessionStorage.getItem("lang") || "berrichon-francais");
+  }, [])
+
+  function handleSelect(e: React.ChangeEvent<HTMLSelectElement>) { 
+    sessionStorage.setItem("lang", e.target.value);
     setLang(e.target.value);
   }
 

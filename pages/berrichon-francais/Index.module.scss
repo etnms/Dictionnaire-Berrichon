@@ -2,9 +2,12 @@
 @use "../../styles/variables";
 
 .page {
-    @include mixin.flex-center;
+    display: flex;
+    align-items: center;
+    padding: 2rem 4rem;
     flex-direction: column;
     background-color: variables.$bg-second;
+    height: 100vh;
 }
 
 .paragraph {

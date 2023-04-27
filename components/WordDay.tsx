@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from "./WordDay.module.scss";
 import { IWord } from '../utils/types';
 import Loader from './Loader';
+import Spinner from './Spinner';
 
 
 interface IWordOfTheDayProps {
@@ -11,13 +12,17 @@ interface IWordOfTheDayProps {
 function WordDay(props: IWordOfTheDayProps) {
     const { wordOfTheDay } = props;
 
-    if (wordOfTheDay === null) { return <Loader /> } else{
-        return <div className={styles.container}>
-            <h2>Mot du jour: {wordOfTheDay?.word} {wordOfTheDay?.pos ? `(${wordOfTheDay?.pos})` : ""}</h2>
-            <p>Traduction: {wordOfTheDay?.translation}</p>
-            <p>{wordOfTheDay?.definition ? `Définition: ${wordOfTheDay?.definition}` : null}</p>
-        </div>
-    }
+    return <div className={styles.container}>
+        <h2>Mot du jour</h2>
+        {wordOfTheDay === null || wordOfTheDay === undefined ? <Spinner height="60px" width="60px" border="4px solid #f3f3f3" borderTop="4px solid #607196" /> :
+            <div className={styles["word-container"]}>
+                <p className={styles.word}>{wordOfTheDay?.word} {wordOfTheDay?.pos ? `(${wordOfTheDay?.pos})` : ""}</p>
+                <p>Traduction: {wordOfTheDay?.translation}</p>
+                <p>{wordOfTheDay?.definition ? `Définition: ${wordOfTheDay?.definition}` : null}</p>
+            </div>
+        }
+    </div>
 }
+
 
 export default WordDay;
