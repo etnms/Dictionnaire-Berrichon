@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { connect } from "../../utils/connectMongo";
 import { Word } from "../../utils/model";
-import natural from 'natural';
-
+import natural from "natural";
+import NodeCache from "node-cache";
 
 interface IWordDB {
     word: string;
@@ -12,6 +12,8 @@ interface IWordDB {
     pos: string;
 }
 
+const cache = new NodeCache();
+
 // Calculate the Levenshtein distance between two strings
 function levenshteinDistance(a: string, b: string) {
     return natural.LevenshteinDistance(a, b);
@@ -19,6 +21,14 @@ function levenshteinDistance(a: string, b: string) {
 
 // Find similar words to the user's input
 async function findSimilarWords(input: string, lang: string) {
+
+    // Caching to improve performance of the function
+    const cacheKey = `findSimilarWords_${lang}_${input}`;
+    const cachedResult = cache.get(cacheKey);
+    if (cachedResult) {
+        return cachedResult;
+    }
+
     const words = await Word.find({});
     const isBerrichonToFrancais = lang === "berrichon-francais";
     const isFrancaisToBerrichon = lang === "francais-berrichon";
@@ -35,9 +45,10 @@ async function findSimilarWords(input: string, lang: string) {
         .map((word) => ({ word, distance: similarityFunc(word) }))
         .filter(({ distance }) => distance <= 2)
         .sort((a, b) => a.distance - b.distance)
-        .slice(0, 11)
+        .slice(0, 11) // limtis the number of results sent back to the front-end
         .map(({ word }) => word);
 
+        cache.set(cacheKey, similarWords);
     return similarWords;
 }
 
