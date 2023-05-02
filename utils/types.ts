@@ -12,3 +12,9 @@ export interface IWord {
   definition: string;
   pos: string;
 }
+
+export interface ISimilarWord {
+  word: string,
+  translation: string,
+  _id?: number,
+}

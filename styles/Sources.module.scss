@@ -2,6 +2,7 @@
 
 .page {
     background-color: variables.$bg-second;
+    min-height: 100vh;
 }
 .main {
     display: flex;

@@ -2,13 +2,22 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Word } from "../../utils/model";
 import { connect } from "../../utils/connectMongo";
 
+type ISuggestionRes = string[];
+
+interface ISuggestionWordDb {
+    word?: string;
+    translation?: string;
+    _id?: number;
+}
+
 // Suggestion function that looks through DB using a regex expression but limits results to 10 to not overload the page/users
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     connect();
 
     const { method } = req;
-    const { lang, word } = req.query;
+    const { lang, word } = req.query ;
+
     if (method === "GET") {
         try {
             if (!lang || !word) {
@@ -29,8 +38,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 return;
             }
 
-            const words = await Word.find(query).select(lang === 'berrichon-francais' ? 'word' : 'translation').limit(10);
-            const selectWordOnly = words.map(({ word, translation }) => lang === 'berrichon-francais' ? word : translation);
+            const words: ISuggestionWordDb[] = await Word.find(query).select(lang === 'berrichon-francais' ? 'word' : 'translation').limit(10);
+            const selectWordOnly = words.map(({ word, translation }) => lang === 'berrichon-francais' ? word : translation) as ISuggestionRes;
 
             res.status(200).json(selectWordOnly);
         } catch (err) {

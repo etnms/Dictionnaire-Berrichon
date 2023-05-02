@@ -1,20 +1,19 @@
 import React from "react";
 import SearchBar from "../../components/SearchBar";
 import WordDefinition from "../../components/WordDefinition";
-import { IWord } from "../../utils/types";
+import { ISimilarWord, IWord } from "../../utils/types";
 import styles from "./Word.module.scss";
 import Header from "../../components/Header";
 import Link from "next/link";
 import { GetServerSidePropsContext } from "next";
 
 interface IWordResults {
-  words: Array<IWord>;
-  similarWords: Array<IWord>;
+  words: IWord[];
+  similarWords: ISimilarWord[];
 }
 
 export default function Word(props: IWordResults) {
   const { words, similarWords } = props;
-
   return (
     <div className={styles.page}>
       <Header />
@@ -27,7 +26,7 @@ export default function Word(props: IWordResults) {
               {similarWords.length === 0 ? null :
                 <div className={styles.suggestions}>
                   <p className={styles["text-other"]}>Autres suggestions:</p>
-                  <ul className={styles.list}>{similarWords.map((word: IWord) =>
+                  <ul className={styles.list}>{similarWords.map((word: ISimilarWord) =>
                     <li key={word._id} className={styles.link}>
                       <Link href={`/berrichon-francais/${word.word}`}>{word.word}</Link></li>)}</ul>
                 </div>}
@@ -43,7 +42,7 @@ export default function Word(props: IWordResults) {
         {words.length === 0 ? null :
           <div className={styles["see-also"]}>
             <h2 className={styles.title}>Voir également</h2>
-            <ul className={styles.list}>{similarWords.map((word: IWord) => <li key={word._id} className={styles.link}><Link href={`/berrichon-francais/${word.word}`}>{word.word}</Link></li>)}</ul>
+            <ul className={styles.list}>{similarWords.map((word: ISimilarWord) => <li key={word._id} className={styles.link}><Link href={`/berrichon-francais/${word.word}`}>{word.word}</Link></li>)}</ul>
           </div>}
       </main>
     </div>
