@@ -11,6 +11,7 @@ export interface IWord {
   translation: string;
   definition: string;
   pos: string;
+  gloss: string; 
 }
 
 export interface ISimilarWord {

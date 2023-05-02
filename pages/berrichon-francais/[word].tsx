@@ -34,7 +34,13 @@ export default function Word(props: IWordResults) {
           ) : (
             <ul className={styles["list-results"]}>
               {words.map((result: IWord) => (
-                <WordDefinition word={result.word} translation={result.translation} pos={result.pos} definition={result.definition} key={result._id} />
+                <WordDefinition 
+                word={result.word} 
+                translation={result.translation} 
+                pos={result.pos} 
+                gloss={result.gloss}
+                definition={result.definition} 
+                key={result._id} />
               ))}
             </ul>
           )}
