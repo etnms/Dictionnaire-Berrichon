@@ -14,7 +14,9 @@ const cache = new NodeCache();
 
 // Calculate the Levenshtein distance between two strings
 function levenshteinDistance(a: string, b: string) {
-    return natural.LevenshteinDistance(a, b);
+    // Using Damereau-Levenshtein distance here to account for transposition (ex: 'teh' instead of 'the')
+    // This is still a work in progress in determining the best algorithm for the dictionary
+    return natural.DamerauLevenshteinDistance(a, b);  // natural.LevenshteinDistance
 }
 
 // Find similar words to the user's input
