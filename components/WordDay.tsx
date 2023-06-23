@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from "./WordDay.module.scss";
 import { IWord } from '../utils/types';
-import Loader from './Loader';
 import Spinner from './Spinner';
-
 
 interface IWordOfTheDayProps {
     wordOfTheDay: IWord | null | undefined;
