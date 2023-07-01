@@ -12,6 +12,8 @@
   justify-content: center;
   height: 80vh;
   gap: 2rem;
-  background-color: variables.$bg-second;
-  
+  background-color: variables.$bg;
+  box-shadow: variables.$elevation;
+  border-radius: 0.4rem;
+  margin: 2rem;
 }
