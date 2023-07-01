@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     connect();
 
     const { method } = req;
-    const { lang, word } = req.query ;
+    const { lang, word } = req.query;
 
     if (method === "GET") {
         try {
@@ -39,9 +39,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
 
             const words: ISuggestionWordDb[] = await Word.find(query).select(lang === 'berrichon-francais' ? 'word' : 'translation').limit(10);
-            const selectWordOnly = words.map(({ word, translation }) => lang === 'berrichon-francais' ? word : translation) as ISuggestionRes;
+            const uniqueWords: string[] = [];
+            const suggestions: ISuggestionRes = [];
 
-            res.status(200).json(selectWordOnly);
+            words.forEach(({ word, translation }) => {
+                const suggestion = lang === 'berrichon-francais' ? word : translation;
+                if (suggestion && !uniqueWords.includes(suggestion)) {
+                    uniqueWords.push(suggestion);
+                    suggestions.push(suggestion);
+                  }
+            });
+            suggestions.sort();
+            res.status(200).json(suggestions);
+
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: 'Internal server error' });

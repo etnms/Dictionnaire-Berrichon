@@ -110,20 +110,31 @@ function SearchBar() {
     };
   }, [ref]);
 
+  // functions to handle different scenarios to display the search bar or not
+  function renderSearchSuggestions() {
+    if (memoizedSuggestions[0] === input && memoizedSuggestions.length === 1)
+      return null;
+    else if (input.length < 3)// && memoizedSuggestions.length === 0
+      return null;
+    else if (memoizedSuggestions.length > 0) {
+      return <ul className={styles.suggestion}>
+        {memoizedSuggestions.map((suggestion, index) => (
+          <li key={index} onClick={() => fillOutSearchBar(suggestion)} className={styles["selected-suggestion"]}>{suggestion}</li>
+        ))}
+      </ul>
+    }
+    else 
+      return null
+  }
+
   return (
     <div className={styles["wrapper-search"]} ref={ref}>
       <div className={styles["wrapper-input"]}>
         <input className={styles["search-bar"]} name="main-input" onChange={(e) => debouncedHandleInput(e)} onKeyDown={(e) => handleKeyDown(e)} autoComplete="off" />
-        {memoizedSuggestions.length > 1 && ( // value of 1 to hide suggestion when the result is 0 or only 1 word, which is the final result
-          <ul className={styles.suggestion}>
-            {memoizedSuggestions.map((suggestion, index) => (
-              <li key={index} onClick={() => fillOutSearchBar(suggestion)} className={styles["selected-suggestion"]}>{suggestion}</li>
-            ))}
-          </ul>
-        )}
+        {renderSearchSuggestions()}
         <Tooltip />
       </div>
-      <ToggleSwitch lang={lang} setLang={setLang}/>
+      <ToggleSwitch lang={lang} setLang={setLang} />
       <button className={styles["btn-search"]} onClick={() => searchWord(input)}>
         Chercher
       </button>
