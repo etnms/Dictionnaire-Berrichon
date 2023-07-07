@@ -1,24 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
+import styles from "../styles/About.module.scss";
+import MainTab from '../components/AboutTabs/MainTab';
+import PronunciationTab from '../components/AboutTabs/PronunciationTab';
+import OtherTab from '../components/AboutTabs/OtherTab';
 
 function About() {
+
+    const [indexTab, changeIndexTab] = useState<number>(0); // default to first index
+
+    function displayTab() {
+
+        switch(indexTab){
+            case 0:
+                return MainTab();
+            case 1:
+                return PronunciationTab();
+            case 2:
+                return OtherTab();
+            default:
+                return MainTab();
+        }
+    }
     return (
-        <div>
+        <div className={styles.page}>
             <Header />
 
-            <button>Le projet</button>
-            <button>Notes sur la prononciation</button>
-            <button>Autres</button>
-            <section>Ce projet a pour but de créer un dictionnaire bi-directionel berrichon-français et français-berrichon</section>
-            <section>Mais c'est quoi le berrichon</section>
-            <section>
-                lien github
-            </section>
-
-            <section>
-                Autres ressources sur le berrichon
-            </section>
+            <main className={styles.main}>
+                <div>
+                    <button onClick={() => changeIndexTab(0)}>Le projet</button>
+                    <button onClick={() => changeIndexTab(1)}>Notes sur la prononciation</button>
+                    <button onClick={() => changeIndexTab(2)}>Autres</button>
+                </div>
+                {displayTab()}
+            </main>
         </div>
+
     );
 }
 
