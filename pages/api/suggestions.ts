@@ -38,7 +38,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 return;
             }
 
-            const words: ISuggestionWordDb[] = await Word.find(query).select(lang === 'berrichon-francais' ? 'word' : 'translation').limit(10);
+            const words: ISuggestionWordDb[] = await Word.find(query)
+            .select(lang === 'berrichon-francais' ? 'word' : 'translation')
+            //.collation({ locale: "fr", strength: 1 })
+            .limit(10);
+
             const uniqueWords: string[] = [];
             const suggestions: ISuggestionRes = [];
 
