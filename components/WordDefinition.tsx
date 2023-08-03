@@ -1,6 +1,7 @@
 import React from "react";
 import translatePOS from "../utils/translatePOS";
 import styles from "./WordDefinition.module.scss";
+import checkGloss from "../utils/checkGloss";
 
 interface IWordProps {
   word: string;
@@ -17,17 +18,6 @@ const WordDefinition = (props: IWordProps) => {
   // This is solely based on values in the database and structure of this dictionary and the 
   // check gloss function can be adapted to the needs of the dictionary
   
-  function checkGloss(value: string) {
-    switch(value) {
-      case "M":
-        return " masculin";
-      case "F":
-        return " féminin";
-      default:
-        return "";
-    }
-  }
-
   return (
     <li className={styles.word}>
       <h1>
