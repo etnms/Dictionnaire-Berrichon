@@ -67,6 +67,7 @@ function SearchBar() {
       const scrollTop = suggestionTop - containerTop;
 
       // Handle scrolling to the first suggestion when at the end and pressing ArrowDown
+      console.log(selectedSuggestionIndex);
       if (selectedSuggestionIndex === 0) {
         container!.scrollTop = 0;
       } else {
