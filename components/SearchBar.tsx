@@ -38,7 +38,9 @@ function SearchBar() {
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === "ArrowUp" || event.key === "ArrowDown") {
       event.preventDefault();
-      const newIndex =
+      console.log(selectedSuggestionIndex);
+      console.log(memoizedSuggestions.length);
+      const newIndex: number =
         event.key === "ArrowUp"
           ? (selectedSuggestionIndex - 1 + memoizedSuggestions.length) %
             memoizedSuggestions.length
