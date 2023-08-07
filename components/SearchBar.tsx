@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo, useRef, useLayoutEffect } from "react";
 import styles from "./SearchBar.module.scss";
 import ToggleSwitch from "./ToggleSwitch";
 import { useRouter } from "next/router";
@@ -36,18 +36,16 @@ function SearchBar() {
   }
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-    if (event.key === "ArrowUp") {
+    if (event.key === "ArrowUp" || event.key === "ArrowDown") {
       event.preventDefault();
-      setSelectedSuggestionIndex(prevIndex =>
-        prevIndex > 0 ? prevIndex - 1 : memoizedSuggestions.length - 1
-      );
-      scrollToSelectedSuggestion();
-    } else if (event.key === "ArrowDown") {
-      event.preventDefault();
-      setSelectedSuggestionIndex(prevIndex =>
-        prevIndex < memoizedSuggestions.length - 1 ? prevIndex + 1 : 0
-      );
-      scrollToSelectedSuggestion();
+      const newIndex =
+        event.key === "ArrowUp"
+          ? (selectedSuggestionIndex - 1 + memoizedSuggestions.length) %
+            memoizedSuggestions.length
+          : (selectedSuggestionIndex + 1) % memoizedSuggestions.length;
+      setSelectedSuggestionIndex(newIndex);
+      scrollToSelectedSuggestion(newIndex);
+      (document.querySelector("input[name='main-input']") as HTMLInputElement).value = suggestions[newIndex];
     } else if (event.key === "Enter") {
       event.preventDefault();
       if (selectedSuggestionIndex !== -1) {
@@ -58,19 +56,19 @@ function SearchBar() {
     }
   }
 
-  function scrollToSelectedSuggestion() {
+  function scrollToSelectedSuggestion(index: number) {
     if (selectedSuggestionRef.current) {
       const container = selectedSuggestionRef.current.parentElement;
       const selectedSuggestion = selectedSuggestionRef.current;
       const containerTop = container!.getBoundingClientRect().top;
       const suggestionTop = selectedSuggestion.getBoundingClientRect().top;
       const scrollTop = suggestionTop - containerTop;
-
-      // Handle scrolling to the first suggestion when at the end and pressing ArrowDown
-      console.log(selectedSuggestionIndex);
-      if (selectedSuggestionIndex === 0) {
+  
+      if (index === 0) {
         container!.scrollTop = 0;
-      } else {
+      } else if (index === memoizedSuggestions.length - 1) {
+        container!.scrollTop = container!.scrollHeight;
+      } else if (selectedSuggestion) {
         container!.scrollTop = scrollTop;
       }
     }
@@ -123,6 +121,7 @@ function SearchBar() {
     (document.querySelector("input[name='main-input']") as HTMLInputElement).value = value;
     setInput(value);
     // Reset suggestions
+    setSelectedSuggestionIndex(-1);
     setSuggestions([]);
     //Click allows for direct search
     searchWord(value);
