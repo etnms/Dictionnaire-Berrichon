@@ -14,6 +14,7 @@ interface IWordResults {
 
 export default function Word(props: IWordResults) {
   const { words, similarWords } = props;
+
   return (
     <div className={styles.page}>
       <Header />

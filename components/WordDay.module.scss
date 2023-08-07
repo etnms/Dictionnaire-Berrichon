@@ -5,7 +5,7 @@
     @include mixin.flex-center;
     flex-direction: column;
     border: 2px solid black;
-    border-radius: 2rem;
+    border-radius: 0.8rem;
     padding: 1rem 6rem;
     width: 60vw;
     box-shadow: variables.$elevation;

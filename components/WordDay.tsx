@@ -13,7 +13,7 @@ interface IWordOfTheDayProps {
 function WordDay(props: IWordOfTheDayProps) {
     const { wordOfTheDay } = props;
 
-    const pageLink = `Voir page de ${wordOfTheDay?.word}`
+    const pageLink = `Voir page de « ${wordOfTheDay?.word} »`
     return <div className={styles.container}>
         <h2>Mot du jour</h2>
         {wordOfTheDay === null || wordOfTheDay === undefined ? <Spinner height="60px" width="60px" border="4px solid #f3f3f3" borderTop="4px solid #607196" /> :

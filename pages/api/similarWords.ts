@@ -10,6 +10,10 @@ interface IWordDb {
     _id?: number;
 }
 
+interface SimilarWord {
+    word: string,
+    _id?: number;
+}
 const cache = new NodeCache();
 
 // Calculate the Levenshtein distance between two strings
@@ -66,7 +70,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
             //Remove the input word from the user from the array
             const similarWordsTrimmed = words.filter((word: IWordDb) => word.word !== req.query.word);
-            res.status(200).json(similarWordsTrimmed);
+
+            const uniqueWords: SimilarWord[] = [];
+            const similarWords: SimilarWord[] = [];
+
+            similarWordsTrimmed.forEach(({ word, translation, _id }) => {
+                const suggestion = req.query.lang === 'berrichon-francais' ? word : translation;
+                if (suggestion && !uniqueWords.some(item => item.word === suggestion)) {
+                    uniqueWords.push({ word: suggestion, _id });
+                    similarWords.push({ word: suggestion, _id });
+                }
+            });
+            similarWords.sort();
+            res.status(200).json(similarWords);
+            //res.status(200).json(similarWordsTrimmed);
         } catch (err) {
             res.status(500).json(err);
         }

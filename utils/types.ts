@@ -16,6 +16,5 @@ export interface IWord {
 
 export interface ISimilarWord {
   word: string,
-  translation: string,
   _id?: number,
 }

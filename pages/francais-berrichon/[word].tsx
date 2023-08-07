@@ -49,7 +49,7 @@ export default function Word(props: IWordResults) {
         {words.length === 0 ? null :
           <div className={styles["see-also"]}>
             <h2 className={styles.title}>Voir également</h2>
-            <ul className={styles.list}>{similarWords.map((word: ISimilarWord) => <li key={word._id} className={styles.link}><Link href={`/francais-berrichon/${word.translation}`}>{word.translation}</Link></li>)}</ul>
+            <ul className={styles.list}>{similarWords.map((word: ISimilarWord) => <li key={word._id} className={styles.link}><Link href={`/francais-berrichon/${word.word}`}>{word.word}</Link></li>)}</ul>
           </div>}
       </main>
     </div>

@@ -11,6 +11,8 @@ function SearchBar() {
   const [lang, setLang] = useState<string>("berrichon-francais"); // default to main
   const [input, setInput] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState<number>(-1);
+  const selectedSuggestionRef = useRef<HTMLLIElement>(null);
 
   // limit for API call to help with debouncing
   const LIMIT = 10;
@@ -33,9 +35,43 @@ function SearchBar() {
     else return;
   }
 
-  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === 'Enter') {
-      searchWord(input);
+  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+      setSelectedSuggestionIndex(prevIndex =>
+        prevIndex > 0 ? prevIndex - 1 : memoizedSuggestions.length - 1
+      );
+      scrollToSelectedSuggestion();
+    } else if (event.key === "ArrowDown") {
+      event.preventDefault();
+      setSelectedSuggestionIndex(prevIndex =>
+        prevIndex < memoizedSuggestions.length - 1 ? prevIndex + 1 : 0
+      );
+      scrollToSelectedSuggestion();
+    } else if (event.key === "Enter") {
+      event.preventDefault();
+      if (selectedSuggestionIndex !== -1) {
+        searchWord(memoizedSuggestions[selectedSuggestionIndex]);
+      } else {
+        setInput(event.target.value);
+      }
+    }
+  }
+
+  function scrollToSelectedSuggestion() {
+    if (selectedSuggestionRef.current) {
+      const container = selectedSuggestionRef.current.parentElement;
+      const selectedSuggestion = selectedSuggestionRef.current;
+      const containerTop = container!.getBoundingClientRect().top;
+      const suggestionTop = selectedSuggestion.getBoundingClientRect().top;
+      const scrollTop = suggestionTop - containerTop;
+
+      // Handle scrolling to the first suggestion when at the end and pressing ArrowDown
+      if (selectedSuggestionIndex === 0) {
+        container!.scrollTop = 0;
+      } else {
+        container!.scrollTop = scrollTop;
+      }
     }
   }
 
@@ -119,11 +155,16 @@ function SearchBar() {
     else if (memoizedSuggestions.length > 0) {
       return <ul className={styles.suggestion}>
         {memoizedSuggestions.map((suggestion, index) => (
-          <li key={index} onClick={() => fillOutSearchBar(suggestion)} className={styles["selected-suggestion"]}>{suggestion}</li>
+          <li ref={index === selectedSuggestionIndex ? selectedSuggestionRef : null}
+            key={index} onClick={() => fillOutSearchBar(suggestion)}
+            onMouseEnter={() => setSelectedSuggestionIndex(index)} // Add this line
+            onMouseLeave={() => setSelectedSuggestionIndex(-1)} className={`${styles["selected-suggestion"]} ${index === selectedSuggestionIndex ? styles.selected : ""
+              }`}>{suggestion}</li>
         ))}
       </ul>
     }
-    else 
+
+    else
       return null
   }
 
