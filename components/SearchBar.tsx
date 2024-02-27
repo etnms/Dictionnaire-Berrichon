@@ -1,17 +1,23 @@
-import React, { useState, useEffect, useMemo, useRef, useLayoutEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useRef,
+  useLayoutEffect,
+} from "react";
 import styles from "./SearchBar.module.scss";
 import ToggleSwitch from "./ToggleSwitch";
 import { useRouter } from "next/router";
 import Tooltip from "./Tooltip";
 
 function SearchBar() {
-
   const router = useRouter();
 
   const [lang, setLang] = useState<string>("berrichon-francais"); // default to main
   const [input, setInput] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState<number>(-1);
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] =
+    useState<number>(-1);
   const selectedSuggestionRef = useRef<HTMLLIElement>(null);
 
   // limit for API call to help with debouncing
@@ -22,7 +28,7 @@ function SearchBar() {
 
   useEffect(() => {
     setLang(sessionStorage.getItem("lang") || "berrichon-francais");
-  }, [])
+  }, []);
 
   // Handle input
   function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
@@ -47,7 +53,9 @@ function SearchBar() {
           : (selectedSuggestionIndex + 1) % memoizedSuggestions.length;
       setSelectedSuggestionIndex(newIndex);
       scrollToSelectedSuggestion(newIndex);
-      (document.querySelector("input[name='main-input']") as HTMLInputElement).value = suggestions[newIndex];
+      (
+        document.querySelector("input[name='main-input']") as HTMLInputElement
+      ).value = suggestions[newIndex];
     } else if (event.key === "Enter") {
       event.preventDefault();
       if (selectedSuggestionIndex !== -1) {
@@ -65,7 +73,7 @@ function SearchBar() {
       const containerTop = container!.getBoundingClientRect().top;
       const suggestionTop = selectedSuggestion.getBoundingClientRect().top;
       const scrollTop = suggestionTop - containerTop;
-  
+
       if (index === 0) {
         container!.scrollTop = 0;
       } else if (index === memoizedSuggestions.length - 1) {
@@ -96,19 +104,25 @@ function SearchBar() {
   }
   // API call to suggestion based on input
   useEffect(() => {
-    // limit API call to only input of 3 characters and more 
+    // limit API call to only input of 3 characters and more
     if (input === "" || input.length < 3) {
       setSuggestions([]);
-      return
-    };
+      return;
+    }
 
     // Call backend API here to fetch suggestions
     // pass the input value as a query parameter to filter the suggestions
-    const debouncedFetch = debounce((searchQuery: string) => {
-      fetch(`/api/suggestions?word=${searchQuery}&lang=${lang}`)
-        .then((response) => response.json())
-        .then((data) => { setSuggestions(data) });
-    }, 500, LIMIT);
+    const debouncedFetch = debounce(
+      (searchQuery: string) => {
+        fetch(`/api/suggestions?word=${searchQuery}&lang=${lang}`)
+          .then((response) => response.json())
+          .then((data) => {
+            setSuggestions(data);
+          });
+      },
+      500,
+      LIMIT
+    );
     debouncedFetch(input);
   }, [input]);
 
@@ -120,7 +134,9 @@ function SearchBar() {
 
   // Fill out search bar when clicking on a suggestion
   function fillOutSearchBar(value: string) {
-    (document.querySelector("input[name='main-input']") as HTMLInputElement).value = value;
+    (
+      document.querySelector("input[name='main-input']") as HTMLInputElement
+    ).value = value;
     setInput(value);
     // Reset suggestions
     setSelectedSuggestionIndex(-1);
@@ -140,11 +156,11 @@ function SearchBar() {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
 
     // cleanup function to remove event listener
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [ref]);
 
@@ -152,36 +168,53 @@ function SearchBar() {
   function renderSearchSuggestions() {
     if (memoizedSuggestions[0] === input && memoizedSuggestions.length === 1)
       return null;
-    else if (input.length < 3)// && memoizedSuggestions.length === 0
+    else if (input.length < 3)
+      // && memoizedSuggestions.length === 0
       return null;
     else if (memoizedSuggestions.length > 0) {
-      return <ul className={styles.suggestion}>
-        {memoizedSuggestions.map((suggestion, index) => (
-          <li ref={index === selectedSuggestionIndex ? selectedSuggestionRef : null}
-            key={index} onClick={() => fillOutSearchBar(suggestion)}
-            onMouseEnter={() => setSelectedSuggestionIndex(index)} // Add this line
-            onMouseLeave={() => setSelectedSuggestionIndex(-1)} className={`${styles["selected-suggestion"]} ${index === selectedSuggestionIndex ? styles.selected : ""
-              }`}>{suggestion}</li>
-        ))}
-      </ul>
-    }
-
-    else
-      return null
+      return (
+        <ul className={styles.suggestion}>
+          {memoizedSuggestions.map((suggestion, index) => (
+            <li
+              ref={
+                index === selectedSuggestionIndex ? selectedSuggestionRef : null
+              }
+              key={index}
+              onClick={() => fillOutSearchBar(suggestion)}
+              onMouseEnter={() => setSelectedSuggestionIndex(index)} // Add this line
+              onMouseLeave={() => setSelectedSuggestionIndex(-1)}
+              className={`${styles["selected-suggestion"]} ${
+                index === selectedSuggestionIndex ? styles.selected : ""
+              }`}
+            >
+              {suggestion}
+            </li>
+          ))}
+        </ul>
+      );
+    } else return null;
   }
 
   return (
     <div className={styles["wrapper-search"]} ref={ref}>
       <div className={styles["wrapper-input"]}>
-        <input className={styles["search-bar"]} name="main-input" onChange={(e) => debouncedHandleInput(e)} onKeyDown={(e) => handleKeyDown(e)} autoComplete="off" />
+        <input
+          className={styles["search-bar"]}
+          name="main-input"
+          onChange={(e) => debouncedHandleInput(e)}
+          onKeyDown={(e) => handleKeyDown(e)}
+          autoComplete="off"
+        />
         {renderSearchSuggestions()}
         <Tooltip />
       </div>
       <ToggleSwitch lang={lang} setLang={setLang} />
-      <button className={styles["btn-search"]} onClick={() => searchWord(input)}>
+      <button
+        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        onClick={() => searchWord(input)}
+      >
         Chercher
       </button>
-
     </div>
   );
 }
