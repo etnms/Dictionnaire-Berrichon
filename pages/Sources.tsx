@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../styles/Sources.module.scss";
 import Header from "../components/Navbar";
 
-function Sources() {
+const Sources: React.FC = () => {
   return (
     <div className={styles.page}>
       <Header />
@@ -61,6 +61,6 @@ function Sources() {
       </main>
     </div>
   );
-}
+};
 
 export default Sources;
