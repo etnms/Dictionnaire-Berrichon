@@ -9,7 +9,7 @@ interface IWordOfTheDayProps {
   wordOfTheDay: IWord | null | undefined;
 }
 
-function WordDay(props: IWordOfTheDayProps) {
+const WordDay: React.FC<IWordOfTheDayProps> = (props) => {
   const { wordOfTheDay } = props;
 
   const pageLink = `Voir page de « ${wordOfTheDay?.word} »`;
@@ -19,12 +19,7 @@ function WordDay(props: IWordOfTheDayProps) {
         Mot du jour
       </h2>
       {wordOfTheDay === null || wordOfTheDay === undefined ? (
-        <Spinner
-          height="60px"
-          width="60px"
-          border="4px solid #f3f3f3"
-          borderTop="4px solid #607196"
-        />
+        <Spinner />
       ) : (
         <div>
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
@@ -55,6 +50,6 @@ function WordDay(props: IWordOfTheDayProps) {
       )}
     </div>
   );
-}
+};
 
 export default WordDay;

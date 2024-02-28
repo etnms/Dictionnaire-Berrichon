@@ -2,7 +2,7 @@ import React from "react";
 import Spinner from "./Spinner";
 import styles from "./Loader.module.css";
 
-const Loader = () => {
+const Loader: React.FC = () => {
   return (
     <div className={styles.loader}>
       <Spinner />

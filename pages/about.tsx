@@ -5,7 +5,7 @@ import MainTab from "../components/AboutTabs/MainTab";
 import PronunciationTab from "../components/AboutTabs/PronunciationTab";
 import OtherTab from "../components/AboutTabs/OtherTab";
 
-function About() {
+const About: React.FC = () => {
   const [indexTab, changeIndexTab] = useState<number>(0); // default to first index
 
   function displayTab() {
@@ -66,6 +66,6 @@ function About() {
       </main>
     </div>
   );
-}
+};
 
 export default About;

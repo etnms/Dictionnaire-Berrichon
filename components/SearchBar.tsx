@@ -10,7 +10,7 @@ import ToggleSwitch from "./ToggleSwitch";
 import { useRouter } from "next/router";
 import Tooltip from "./Tooltip";
 
-function SearchBar() {
+const SearchBar: React.FC = () => {
   const router = useRouter();
 
   const [lang, setLang] = useState<string>("berrichon-francais"); // default to main
@@ -217,6 +217,6 @@ function SearchBar() {
       </button>
     </div>
   );
-}
+};
 
 export default SearchBar;
