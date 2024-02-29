@@ -1,0 +1,35 @@
+
+.suggestion {
+  list-style: none;
+  width: 40vw;
+  font-size: 1.3rem;
+  max-height: 40vh;
+  overflow-y: auto;
+  cursor: pointer;
+  position: absolute;
+  top: 100%;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.suggestion::-webkit-scrollbar {
+  width: 10px;
+}
+
+.suggestion::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 12px;
+}
+
+.suggestion::-webkit-scrollbar-track {
+  margin: 2px;
+  border-radius: 12px;
+}
+.selected-suggestion {
+  padding: 0.2rem 0.5rem;
+}
+
+.selected {
+  background-color: #4176CC;
+  color: white;
+}

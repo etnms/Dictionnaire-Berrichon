@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import styles from "./SearchBar.module.scss";
+import styles from "./SearchBar.module.css";
 import ToggleSwitch from "./ToggleSwitch";
 import { useRouter } from "next/router";
-import Tooltip from "./Tooltip";
 
 const SearchBar: React.FC = () => {
   const router = useRouter();
@@ -38,8 +37,6 @@ const SearchBar: React.FC = () => {
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === "ArrowUp" || event.key === "ArrowDown") {
       event.preventDefault();
-      console.log(selectedSuggestionIndex);
-      console.log(memoizedSuggestions.length);
       const newIndex: number =
         event.key === "ArrowUp"
           ? (selectedSuggestionIndex - 1 + memoizedSuggestions.length) %
@@ -167,7 +164,12 @@ const SearchBar: React.FC = () => {
       return null;
     else if (memoizedSuggestions.length > 0) {
       return (
-        <ul className={styles.suggestion}>
+        <ul
+          className={`${styles.suggestion}
+        text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 
+        focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+        dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-50`}
+        >
           {memoizedSuggestions.map((suggestion, index) => (
             <li
               ref={
@@ -204,7 +206,7 @@ const SearchBar: React.FC = () => {
               stroke="currentColor"
               stroke-linecap="round"
               stroke-linejoin="round"
-              stroke-width="2"
+              strokeWidth="2"
               d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
             />
           </svg>
