@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Title from "../components/Title";
 import SearchBar from "../components/SearchBar";
-import styles from "../styles/Home.module.scss";
 import Header from "../components/Navbar";
 import WordDay from "../components/WordDay";
 import { useEffect, useState } from "react";
@@ -41,7 +40,7 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <div className={styles.page}>
+    <div className="">
       <Head>
         <title>Dictionnaire Berrichon</title>
         <meta
@@ -51,7 +50,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className={styles.main}>
+      <main className="py-10 text-center flex flex-col gap-12 justify-center items-center ">
         <Title />
         <SearchBar />
         <WordDay wordOfTheDay={wordOfTheDay} />

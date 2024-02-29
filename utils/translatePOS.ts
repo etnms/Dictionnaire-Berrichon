@@ -5,15 +5,17 @@ export default function translatePOS(input: string) {
     case "verb":
       return "verbe";
     case "pronoun":
-      return "pronom"
+      return "pronom";
     case "adjective":
       return "adjectif";
+    case "adverb":
+      return "adverbe";
     case "interjection":
-      return "interjection"
+      return "interjection";
     case "preposition":
       return "préposition";
     case "conjuction":
-      return "conjonction"
+      return "conjonction";
     default:
       return null;
   }
