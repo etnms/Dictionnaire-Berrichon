@@ -1,21 +1,16 @@
 import React from "react";
-import SearchBar from "../../components/SearchBar";
+import IndexContent from "../../components/IndexContent";
 
 const index: React.FC = () => {
   return (
-    <div className="">
-      <h1>Dictionnaire français-berrichon</h1>
-      <p className="">
-        Le dictionnaire français-berrichon a pour but de regrouper le lexique du
+    <IndexContent
+      title="Dictionnaire français-berrichon"
+      paragraph="Le dictionnaire français-berrichon a pour but de regrouper le lexique du
         Berrichon et de fournir une traduction en français. Ce dictionnaire est
-        en constante évolution et de nouveaux mots sont ajoutés jour après jour.
-      </p>
-      <p className="">
-        Vous pouvez commencer à chercher en tapant un mot dans la barrer de
-        recherche ci-dessous.
-      </p>
-      <SearchBar />
-    </div>
+        en constante évolution et de nouveaux mots sont ajoutés jour après jour."
+      searchText="Vous pouvez commencer à chercher en tapant un mot dans la barrer de
+        recherche ci-dessous."
+    />
   );
 };
 
