@@ -15,7 +15,6 @@ const Reference: React.FC<Reference> = ({
   editor,
   link,
 }) => {
-  console.log(editor);
   return (
     <li className="p-2">
       {author}({date}). <em>{title}.</em>{" "}
