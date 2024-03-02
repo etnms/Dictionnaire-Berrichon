@@ -1,12 +1,12 @@
 import React from "react";
-import { IWord } from "../utils/types";
+import { Word } from "../utils/types";
 import Spinner from "./Spinner";
 import translatePOS from "../utils/translatePOS";
 import Link from "next/link";
 import checkGloss from "../utils/checkGloss";
 
 interface IWordOfTheDayProps {
-  wordOfTheDay: IWord | null | undefined;
+  wordOfTheDay: Word | null | undefined;
 }
 
 const WordDay: React.FC<IWordOfTheDayProps> = (props) => {
@@ -41,7 +41,7 @@ const WordDay: React.FC<IWordOfTheDayProps> = (props) => {
           <div>
             <Link
               href={`/berrichon-francais/${wordOfTheDay?.word}`}
-              className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 rounded-lg hover:text-blue-700 focus:z-10  dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
             >
               {pageLink}
             </Link>

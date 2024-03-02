@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const Header: React.FC = () => {
+const Navbar: React.FC = () => {
   return (
     <nav className="bg-white dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -67,4 +67,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default Navbar;

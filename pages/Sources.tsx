@@ -1,13 +1,13 @@
 import React from "react";
-import Header from "../components/Navbar";
 import Reference from "../components/Reference";
+import Navbar from "../components/Navbar";
 
 const Sources: React.FC = () => {
   return (
     <div className="">
-      <Header />
+      <Navbar />
       <main className="px-16">
-        <h1 className="p-2 mb-4 text-3xl font-bold leading-none tracking-tight text-gray-900 dark:text-white">
+        <h1 className="p-2 text-3xl font-bold leading-none tracking-tight text-gray-900 dark:text-white">
           Sources et références
         </h1>
         <p className="mb-3 p-2">

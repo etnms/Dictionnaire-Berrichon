@@ -1,20 +1,20 @@
-export interface ResponseFuncs {
+export type ResponseFuncs = {
   GET?: Function;
   POST?: Function;
   PUT?: Function;
   DELETE?: Function;
-}
+};
 
-export interface IWord {
+export type Word = {
   _id?: number;
   word: string;
   translation: string;
   definition: string;
   pos: string;
-  gloss: string; 
-}
+  gloss: string;
+};
 
-export interface ISimilarWord {
-  word: string,
-  _id?: number,
-}
+export type SimilarWord = {
+  word: string;
+  _id?: number;
+};
