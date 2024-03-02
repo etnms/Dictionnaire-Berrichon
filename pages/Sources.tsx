@@ -1,19 +1,19 @@
 import React from "react";
-import styles from "../styles/Sources.module.scss";
+
 import Header from "../components/Navbar";
 
 const Sources: React.FC = () => {
   return (
-    <div className={styles.page}>
+    <div className="">
       <Header />
-      <main className={styles.main}>
-        <h1 className={styles.title}>Sources et références</h1>
-        <p className={styles.intro}>
+      <main className="">
+        <h1 className="">Sources et références</h1>
+        <p className="">
           Ce dictionnaire berrichon en ligne est le résultat d'un travail de
           recherche et de regroupement de sources. Vous pouvez donc accéder
           ci-dessous à la liste des travaux au coeur de ce dictionnaire.{" "}
         </p>
-        <ul className={styles.list}>
+        <ul className="">
           <li>
             Gilbert, J.-P. (2006). <em>Petit dictionnaire berrichon.</em>{" "}
             <a href="http://www.gilblog.fr/petit-dictionnaire-berricho/index.html">
