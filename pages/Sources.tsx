@@ -7,14 +7,16 @@ const Sources: React.FC = () => {
   return (
     <div className="">
       <Header />
-      <main className="">
-        <h1 className="">Sources et références</h1>
-        <p className="">
+      <main className="px-16">
+        <h1 className="p-2 mb-4 text-3xl font-bold leading-none tracking-tight text-gray-900 dark:text-white">
+          Sources et références
+        </h1>
+        <p className="mb-3 p-2">
           Ce dictionnaire berrichon en ligne est le résultat d'un travail de
           recherche et de regroupement de sources. Vous pouvez donc accéder
-          ci-dessous à la liste des travaux au coeur de ce dictionnaire.{" "}
+          ci-dessous à la liste des travaux au coeur de ce dictionnaire.
         </p>
-        <ul className="">
+        <ul className="p-4 list-none">
           <Reference
             author="Gilbert, J.-P."
             date="2006"
