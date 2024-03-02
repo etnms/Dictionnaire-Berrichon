@@ -2,7 +2,6 @@ import React from "react";
 import SearchBar from "../../components/SearchBar";
 import WordDefinition from "../../components/WordDefinition";
 import { ISimilarWord, IWord } from "../../utils/types";
-import styles from "./Word.module.scss";
 import Header from "../../components/Navbar";
 import Link from "next/link";
 import { GetServerSidePropsContext } from "next";
@@ -16,22 +15,22 @@ export default function Word(props: IWordResults) {
   const { words, similarWords } = props;
 
   return (
-    <div className={styles.page}>
+    <div className="">
       <Header />
-      <main className={styles.main}>
+      <main className="">
         <SearchBar />
-        <div className={styles.results}>
+        <div className="">
           {words.length === 0 ? (
             <div>
-              <p className={styles["text-no-result"]}>
+              <p className="">
                 Aucun résultat n&apos;a été trouvé pour ce mot.
               </p>
               {similarWords.length === 0 ? null : (
-                <div className={styles.suggestions}>
-                  <p className={styles["text-other"]}>Autres suggestions:</p>
-                  <ul className={styles.list}>
+                <div className="">
+                  <p className="">Autres suggestions:</p>
+                  <ul className="">
                     {similarWords.map((word: ISimilarWord) => (
-                      <li key={word._id} className={styles.link}>
+                      <li key={word._id} className="">
                         <Link href={`/francais-berrichon/${word.word}`}>
                           {word.word}
                         </Link>
@@ -42,7 +41,7 @@ export default function Word(props: IWordResults) {
               )}
             </div>
           ) : (
-            <ul className={styles["list-results"]}>
+            <ul className="">
               {words.map((result: IWord) => (
                 <WordDefinition
                   word={result.word}
@@ -57,11 +56,11 @@ export default function Word(props: IWordResults) {
           )}
         </div>
         {words.length === 0 ? null : (
-          <div className={styles["see-also"]}>
-            <h2 className={styles.title}>Voir également</h2>
-            <ul className={styles.list}>
+          <div className="">
+            <h2 className="">Voir également</h2>
+            <ul className="">
               {similarWords.map((word: ISimilarWord) => (
-                <li key={word._id} className={styles.link}>
+                <li key={word._id} className="">
                   <Link href={`/francais-berrichon/${word.word}`}>
                     {word.word}
                   </Link>
