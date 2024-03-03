@@ -12,7 +12,7 @@ const IndexContent: React.FC<IndexContent> = ({
   searchText,
 }) => {
   return (
-    <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
+    <div className="text-center dark:bg-gray-900 min-h-svh p-8">
       <h1 className="m-4 text-4xl text-center font-bold leading-none tracking-tight text-gray-900 dark:text-white">
         {title}
       </h1>

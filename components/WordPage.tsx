@@ -19,7 +19,7 @@ const WordPage: React.FC<WordPage> = ({
   return (
     <>
       <Navbar />
-      <main className="flex flex-col items-center gap-6">
+      <main className="flex flex-col min-h-svh items-center gap-6 dark:bg-gray-900 p-2">
         <SearchBar />
         <div className="w-4/5 flex flex-col items-center gap-6">
           {words.length === 0 ? (

@@ -1,6 +1,4 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import Title from "../components/Title";
 import SearchBar from "../components/SearchBar";
 import WordDay from "../components/WordDay";
 import { useEffect, useState } from "react";
@@ -42,8 +40,11 @@ const Home: NextPage = () => {
   return (
     <>
       <Navbar />
-      <main className="py-10 text-center flex flex-col gap-6 justify-center items-center ">
-        <Title />
+      <main className="bg-white dark:bg-gray-900 py-10 text-center flex flex-col gap-6 justify-center items-center">
+        <h1 className="text-4xl dark:text-white">
+          Dictionnaire Francais-Berrichon
+        </h1>
+        ;
         <SearchBar />
         <WordDay wordOfTheDay={wordOfTheDay} />
       </main>

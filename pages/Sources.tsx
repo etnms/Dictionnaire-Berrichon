@@ -6,11 +6,11 @@ const Sources: React.FC = () => {
   return (
     <>
       <Navbar />
-      <main className="px-16">
+      <main className="px-16 dark:bg-gray-900 min-h-svh">
         <h1 className="p-2 text-3xl font-bold leading-none tracking-tight text-gray-900 dark:text-white">
           Sources et références
         </h1>
-        <p className="mb-3 p-2">
+        <p className="mb-3 p-2 dark:text-white">
           Ce dictionnaire berrichon en ligne est le résultat d'un travail de
           recherche et de regroupement de sources. Vous pouvez donc accéder
           ci-dessous à la liste des travaux au coeur de ce dictionnaire.

@@ -17,7 +17,7 @@ const WordSeeAlso: React.FC<WordSeeAlso> = ({
         {similarWords.map((word: SimilarWord) => (
           <li
             key={word._id}
-            className="py-2 px-4 ms-2 text-m  text-gray-900 hover:text-blue-700 focus:z-10 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            className="py-2 px-4 ms-2 text-m rounded-lg text-gray-900 hover:text-blue-700 focus:z-10 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
           >
             <Link href={`/${languageDirection}/${word.word}`}>{word.word}</Link>
           </li>

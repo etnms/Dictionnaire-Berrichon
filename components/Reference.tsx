@@ -16,7 +16,7 @@ const Reference: React.FC<Reference> = ({
   link,
 }) => {
   return (
-    <li className="p-2">
+    <li className="p-2 dark:text-white">
       {author}({date}). <em>{title}.</em>{" "}
       {editor !== undefined && editor !== "" ? `${editor}.` : ""}
       {link !== undefined && link !== "" ? (
