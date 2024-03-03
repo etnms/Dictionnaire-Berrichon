@@ -44,7 +44,6 @@ const Home: NextPage = () => {
         <h1 className="text-4xl dark:text-white">
           Dictionnaire Francais-Berrichon
         </h1>
-        ;
         <SearchBar />
         <WordDay wordOfTheDay={wordOfTheDay} />
       </main>
