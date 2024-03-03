@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 
 const Sources: React.FC = () => {
   return (
-    <div className="">
+    <>
       <Navbar />
       <main className="px-16">
         <h1 className="p-2 text-3xl font-bold leading-none tracking-tight text-gray-900 dark:text-white">
@@ -58,7 +58,7 @@ const Sources: React.FC = () => {
           />
         </ul>
       </main>
-    </div>
+    </>
   );
 };
 

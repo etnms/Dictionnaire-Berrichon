@@ -11,7 +11,7 @@ const WordSeeAlso: React.FC<WordSeeAlso> = ({
   languageDirection,
 }) => {
   return (
-    <div className="flex flex-col items-center gap-2 p-2 w-2/4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="flex flex-col items-center gap-2 p-2 w-2/4 p-6 mb-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <h2 className="text-3xl font-bold dark:text-white">Voir également</h2>
       <ul className="">
         {similarWords.map((word: SimilarWord) => (

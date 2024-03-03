@@ -3,7 +3,7 @@ import Header from "../components/Navbar";
 
 const About: React.FC = () => {
   return (
-    <div className="">
+    <>
       <Header />
       <section className="px-16">
         <h1 className="p-2 text-3xl font-bold leading-none tracking-tight text-gray-900 dark:text-white">
@@ -41,7 +41,7 @@ const About: React.FC = () => {
           site sur Github: <a>lien github</a>{" "}
         </p>
       </section>
-    </div>
+    </>
   );
 };
 
