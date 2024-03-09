@@ -5,11 +5,11 @@ import translatePOS from "../utils/translatePOS";
 import Link from "next/link";
 import checkGloss from "../utils/checkGloss";
 
-interface IWordOfTheDayProps {
+type WordOfTheDayProps = {
   wordOfTheDay: Word | null | undefined;
-}
+};
 
-const WordDay: React.FC<IWordOfTheDayProps> = (props) => {
+const WordDay: React.FC<WordOfTheDayProps> = (props) => {
   const { wordOfTheDay } = props;
 
   const pageLink = `Voir page de « ${wordOfTheDay?.word} »`;

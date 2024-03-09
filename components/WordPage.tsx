@@ -1,18 +1,19 @@
 import React from "react";
 import WordSeeAlso from "./WordSeeAlso";
 import Link from "next/link";
-import { SimilarWord, Word } from "../utils/types";
+import { SimilarWord, Entry } from "../utils/types";
 import WordDefinition from "./WordDefinition";
 import Navbar from "./Navbar";
 import SearchBar from "./SearchBar";
 
 type WordPage = {
-  words: Word[];
+  entries: any;
   similarWords: SimilarWord[];
   languageDirection: string;
 };
+
 const WordPage: React.FC<WordPage> = ({
-  words,
+  entries,
   similarWords,
   languageDirection,
 }) => {
@@ -22,7 +23,7 @@ const WordPage: React.FC<WordPage> = ({
       <main className="flex flex-col items-center gap-6">
         <SearchBar />
         <div className="w-4/5 flex flex-col items-center gap-6">
-          {words.length === 0 ? (
+          {entries.words.length === 0 ? (
             <div className="mb-2">
               <p className="mb-3 p-2">
                 Aucun résultat n&apos;a été trouvé pour ce mot.
@@ -50,7 +51,7 @@ const WordPage: React.FC<WordPage> = ({
             </div>
           ) : (
             <ul className="w-3/4">
-              {words.map((result: Word) => (
+              {entries.words.map((result: Entry) => (
                 <WordDefinition
                   word={result.word}
                   translation={result.translation}
@@ -63,7 +64,7 @@ const WordPage: React.FC<WordPage> = ({
             </ul>
           )}
         </div>
-        {words.length === 0 ? null : (
+        {entries.words.length === 0 ? null : (
           <WordSeeAlso
             similarWords={similarWords}
             languageDirection={languageDirection}
