@@ -1,12 +1,12 @@
 import React from "react";
-import { Word } from "../utils/types";
+import { Entry } from "../utils/types";
 import Spinner from "./Spinner";
 import translatePOS from "../utils/translatePOS";
 import Link from "next/link";
 import checkGloss from "../utils/checkGloss";
 
 type WordOfTheDayProps = {
-  wordOfTheDay: Word | null | undefined;
+  wordOfTheDay: Entry | null | undefined;
 };
 
 const WordDay: React.FC<WordOfTheDayProps> = (props) => {
