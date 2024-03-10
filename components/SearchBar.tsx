@@ -109,7 +109,7 @@ const SearchBar: React.FC = () => {
         )
           .then((response) => response.json())
           .then((data) => {
-            setSuggestions(data);
+            setSuggestions(data.suggestions);
           });
       },
       500,
