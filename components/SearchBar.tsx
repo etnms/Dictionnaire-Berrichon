@@ -100,7 +100,6 @@ const SearchBar: React.FC = () => {
       setSuggestions([]);
       return;
     }
-
     // Call backend API here to fetch suggestions
     // pass the input value as a query parameter to filter the suggestions
     const debouncedFetch = debounce(
