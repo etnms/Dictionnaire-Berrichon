@@ -5,13 +5,18 @@ export type ResponseFuncs = {
   DELETE?: Function;
 };
 
-export type Word = {
+export type Entry = {
   _id?: number;
   word: string;
   translation: string;
   definition: string;
   pos: string;
   gloss: string;
+};
+
+export type EntryResults = {
+  entries: Entry[];
+  similarWords: SimilarWord[];
 };
 
 export type SimilarWord = {

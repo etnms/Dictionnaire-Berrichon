@@ -1,15 +1,15 @@
 import React from "react";
-import { Word } from "../utils/types";
+import { Entry } from "../utils/types";
 import Spinner from "./Spinner";
 import translatePOS from "../utils/translatePOS";
 import Link from "next/link";
 import checkGloss from "../utils/checkGloss";
 
-interface IWordOfTheDayProps {
-  wordOfTheDay: Word | null | undefined;
-}
+type WordOfTheDayProps = {
+  wordOfTheDay: Entry | null | undefined;
+};
 
-const WordDay: React.FC<IWordOfTheDayProps> = (props) => {
+const WordDay: React.FC<WordOfTheDayProps> = (props) => {
   const { wordOfTheDay } = props;
 
   const pageLink = `Voir page de « ${wordOfTheDay?.word} »`;

@@ -2,11 +2,11 @@ import type { NextPage } from "next";
 import SearchBar from "../components/SearchBar";
 import WordDay from "../components/WordDay";
 import { useEffect, useState } from "react";
-import { Word } from "../utils/types";
+import { Entry } from "../utils/types";
 import Navbar from "../components/Navbar";
 
 const Home: NextPage = () => {
-  const [wordOfTheDay, setWordOfTheDay] = useState<Word | null | undefined>(
+  const [wordOfTheDay, setWordOfTheDay] = useState<Entry | null | undefined>(
     null
   );
 
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
       const res: Response = await fetch(
         `${process.env.NEXT_PUBLIC_API}/api/word-day` as string
       );
-      const word: Word = await res.json();
+      const word: Entry = await res.json();
       // Update state and localStorage
       setWordOfTheDay(word);
       localStorage.setItem("wordDay", JSON.stringify(word));
