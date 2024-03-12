@@ -13,6 +13,20 @@ const SearchBar: React.FC = () => {
     useState<number>(-1);
   const selectedSuggestionRef = useRef<HTMLLIElement>(null);
 
+  // Placeholder text that changes depending on screen size
+  const [searchBarPlaceholder, setSearchBarPlaceholder] = useState<string>(
+    "Rechercher dans le dictionnaire"
+  );
+
+  // Use effect to detect screen size and update placeholder text
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (window.innerWidth < 550) {
+        setSearchBarPlaceholder("Rechercher");
+      }
+    }
+  }, []);
+
   // limit for API call to help with debouncing
   const LIMIT = 10;
 
@@ -218,7 +232,7 @@ const SearchBar: React.FC = () => {
           onChange={(e) => debouncedHandleInput(e)}
           onKeyDown={(e) => handleKeyDown(e)}
           autoComplete="off"
-          placeholder="Rechercher dans le dictionnaire"
+          placeholder={searchBarPlaceholder}
         />
         {renderSearchSuggestions()}
         <button
