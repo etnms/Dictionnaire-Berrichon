@@ -6,12 +6,40 @@ import { useRouter } from "next/router";
 const SearchBar: React.FC = () => {
   const router = useRouter();
 
+  // Lang and input variables
   const [lang, setLang] = useState<string>("berrichon-francais"); // default to main
   const [input, setInput] = useState<string>("");
+
+  // Suggestion variables
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] =
     useState<number>(-1);
   const selectedSuggestionRef = useRef<HTMLLIElement>(null);
+
+  // Search bar ref variable to detect outside clicks
+  const searchBarRef = useRef<HTMLDivElement>(null);
+
+  // useEffect to apply the detect click outside logic
+  useEffect(() => {
+    // Add event listener to detect clicks outside component
+    const handleClickOutside = (event: MouseEvent) => {
+      // When clicked outside
+      if (
+        searchBarRef.current &&
+        !searchBarRef.current.contains(event.target as Node)
+      ) {
+        // Empty suggestion array to hide suggestions
+        setSuggestions([]);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // cleanup function to remove event listener
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // Placeholder text that changes depending on screen size
   const [searchBarPlaceholder, setSearchBarPlaceholder] = useState<string>(
@@ -29,6 +57,7 @@ const SearchBar: React.FC = () => {
 
   // limit for API call to help with debouncing
   const LIMIT = 10;
+  const DEBOUNCETIMEOUT = 500;
 
   // Ref to use to detect outside clicks
   const ref = useRef<HTMLDivElement>(null);
@@ -126,14 +155,17 @@ const SearchBar: React.FC = () => {
             setSuggestions(data.suggestions);
           });
       },
-      500,
+      DEBOUNCETIMEOUT,
       LIMIT
     );
     debouncedFetch(input);
   }, [input]);
 
   // Memoize results
-  const memoizedSuggestions = useMemo(() => suggestions, [suggestions]);
+  const memoizedSuggestions: string[] = useMemo(
+    () => suggestions,
+    [suggestions]
+  );
 
   // Debounce input
   const debouncedHandleInput = debounce(handleInput, 350, 100);
@@ -207,7 +239,10 @@ const SearchBar: React.FC = () => {
   }
 
   return (
-    <div className="max-w-md w-3/4 mx-auto flex flex-col gap-3">
+    <div
+      className="max-w-md w-3/4 mx-auto flex flex-col gap-3"
+      ref={searchBarRef}
+    >
       <div className="relative">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <svg
