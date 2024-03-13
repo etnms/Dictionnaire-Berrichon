@@ -1,8 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 
 const ContactForm: React.FC = () => {
+  const [message, setMessage] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+
+  const sendInfo = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/api/contact`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email_contact: email,
+            subject: "Dictionnaire Berrichon en ligne",
+            message: message,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        console.log("Email sent successfully");
+        // You can add logic here to handle success, such as showing a success message to the user
+      } else {
+        console.error("Failed to send email");
+        // You can add logic here to handle the failure, such as showing an error message to the user
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+    }
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    if (name === "message") {
+      setMessage(value);
+    } else if (name === "email") {
+      setEmail(value);
+    }
+  };
   return (
-    <form className="w-2/4 mx-auto p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <form
+      className="w-2/4 mx-auto p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+      onSubmit={(e) => {
+        e.preventDefault();
+        sendInfo();
+      }}
+    >
       <label
         htmlFor="message"
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -13,6 +61,9 @@ const ContactForm: React.FC = () => {
         id="message"
         className="block p-2.5 w-full h-28 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Votre message"
+        name="message"
+        value={message}
+        onChange={handleInputChange}
       ></textarea>
       <div className="mt-2.5">
         <label
@@ -37,9 +88,12 @@ const ContactForm: React.FC = () => {
 
           <input
             type="text"
-            id="email-address-icon"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="courriel@adresse.com"
+            id="email-address-icon"
+            name="email"
+            value={email}
+            onChange={handleInputChange}
           ></input>
         </div>
       </div>
