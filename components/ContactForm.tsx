@@ -23,10 +23,10 @@ const ContactForm: React.FC = () => {
 
       if (response.ok) {
         console.log("Email sent successfully");
-        // You can add logic here to handle success, such as showing a success message to the user
+        // Add logic here to handle success, such as showing a success message to the user
       } else {
         console.error("Failed to send email");
-        // You can add logic here to handle the failure, such as showing an error message to the user
+        // Add logic here to handle the failure, such as showing an error message to the user
       }
     } catch (error) {
       console.error("Error sending email:", error);

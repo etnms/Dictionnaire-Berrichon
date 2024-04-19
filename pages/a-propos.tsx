@@ -41,7 +41,13 @@ const About: React.FC = () => {
         <section className="px-16">
           <p className="p-2 dark:text-white">
             Ce dictionnaire est un projet open-source est vous pouvez retrouver
-            le site sur Github: <a>lien github</a>
+            le site sur{" "}
+            <a
+              href="https://github.com/etnms/Dictionnaire-Berrichon"
+              className=" font-semibold hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+            >
+              Github
+            </a>
           </p>
         </section>
       </main>
