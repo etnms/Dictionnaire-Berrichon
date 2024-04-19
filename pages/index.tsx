@@ -38,7 +38,21 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <>
+    <div className="">
+      <Head>
+        <title>Dictionnaire Berrichon</title>
+        <meta
+          name="description"
+          content="Homepage for the berrichon francais dictionnary"
+        />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+      </Head>
       <Navbar />
       <main className="bg-white dark:bg-gray-900 py-10 text-center flex flex-col gap-6 justify-center items-center">
         <h1 className="text-4xl dark:text-white">
