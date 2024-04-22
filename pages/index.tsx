@@ -14,6 +14,7 @@ const Home: NextPage = () => {
 
   // Word of the day logic
   useEffect(() => {
+    console.log(process.env.NEXT_PUBLIC_API);
     // Fetch the word of the day and update state
     async function fetchWordOfTheDay() {
       const res: Response = await fetch(
