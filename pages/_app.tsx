@@ -28,6 +28,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Dictionnaire Berrichon</title>
+        <meta
+          name="google-site-verification"
+          content="u-TGG16GXGu9vxEPphaLoUXIgMSnqr_rP5CibLb92P4"
+        />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
