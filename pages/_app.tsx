@@ -28,10 +28,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Dictionnaire Berrichon</title>
-        <meta
-          name="description"
-          content="Homepage for the berrichon francais dictionnary"
-        />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
