@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://dictionnaire-berrichon.fr/
+
+# Sitemaps
+Sitemap: https://dictionnaire-berrichon.fr/sitemap.xml
