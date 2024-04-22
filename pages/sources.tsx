@@ -11,7 +11,7 @@ const Sources: React.FC = () => {
           Sources et références
         </h1>
         <p className="mb-3 p-2 dark:text-white">
-          Ce dictionnaire berrichon en ligne est le résultat d'un travail de
+          Ce dictionnaire berrichon en ligne est le résultat d&#39;un travail de
           recherche et de regroupement de sources. Vous pouvez donc accéder
           ci-dessous à la liste des travaux au coeur de ce dictionnaire.
         </p>

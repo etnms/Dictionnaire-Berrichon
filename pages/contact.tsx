@@ -15,7 +15,7 @@ const Contact: React.FC = () => {
             Si vous avez des questions ou si vous voulez suggérer des
             corrections, ou des mots manquants au dictionnaire, vous pouvez le
             faire avec le formulaire ci-dessous ou en envoyant un courriel à
-            l'adresse suivante:
+            l&#39;adresse suivante:
           </p>
           <a
             href="mailto: contact@dictionnaire-berrichon"
