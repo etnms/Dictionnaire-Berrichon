@@ -1,5 +1,4 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import { GoogleTagManager } from "@next/third-parties/google";
 
 export default function Document() {
   return (
@@ -28,7 +27,7 @@ export default function Document() {
         <meta
           name="description"
           content="dictionnaire, berrichon, francais, français, dictionnaire berrichon, dictionnaire berrichon français, patois, patois berrichon, parler berrichon, dico berrichon, dico, france,
-          Berry, berry, dictionnarie berry"
+          Berry, berry, dictionnarie berry, glossaire, glossaire berrichon, lexique, lexique berrichon"
         />
       </Head>
       <body>

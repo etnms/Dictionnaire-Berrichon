@@ -18,10 +18,10 @@ const Contact: React.FC = () => {
             l&#39;adresse suivante:
           </p>
           <a
-            href="mailto: contact@dictionnaire-berrichon"
+            href={`mailto: ${process.env.EMAIL}`}
             className="p-2 text-purple-600"
           >
-            contact@dictionnaire-berrichon
+            {process.env.EMAIL}
           </a>
         </section>
         <ContactForm />
