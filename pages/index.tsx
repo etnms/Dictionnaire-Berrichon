@@ -43,7 +43,7 @@ const Home: NextPage = () => {
         <Navbar />
         <main className="bg-white dark:bg-gray-900 py-10 text-center flex flex-col gap-6 justify-center items-center">
           <h1 className="text-4xl dark:text-white">
-            Dictionnaire Francais-Berrichon
+            Dictionnaire berrichon en ligne
           </h1>
           <SearchBar />
           <WordDay wordOfTheDay={wordOfTheDay} />

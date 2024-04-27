@@ -26,7 +26,7 @@ export default function Document() {
         />
         <meta
           name="description"
-          content="dictionnaire, berrichon, francais, français, dictionnaire berrichon, dictionnaire berrichon français, patois, patois berrichon, parler berrichon, dico berrichon, dico, france,
+          content="dictionnaire, berrichon, dictionnaire en ligne, dictionnaire berrichon en ligne, francais, français, dictionnaire berrichon, en ligne, dictionnaire berrichon français, patois, patois berrichon, parler berrichon, dico berrichon, dico, france,
           Berry, berry, dictionnarie berry, glossaire, glossaire berrichon, lexique, lexique berrichon"
         />
       </Head>
