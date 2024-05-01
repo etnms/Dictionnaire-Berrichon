@@ -18,7 +18,7 @@ const ToggleDarkModeBtn: React.FC = () => {
   }, [isDarkMode]);
 
   return (
-    <button onClick={toggleDarkMode}>
+    <button onClick={toggleDarkMode} aria-label="Mode sombre">
       <div className="flex flex-col justify-center ml-3">
         <input
           type="checkbox"

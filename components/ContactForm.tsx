@@ -45,6 +45,7 @@ const ContactForm: React.FC = () => {
   };
   return (
     <form
+      aria-label="Formulaire de contact"
       className="w-2/4 mx-auto p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
       onSubmit={(e) => {
         e.preventDefault();
@@ -99,6 +100,7 @@ const ContactForm: React.FC = () => {
       </div>
       <div className="flex items-center">
         <button
+          aria-label="Envoyer"
           type="submit"
           className="my-2 mx-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
