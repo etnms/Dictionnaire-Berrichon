@@ -12,6 +12,7 @@ export type Entry = {
   definition: string;
   pos: string;
   gloss: string;
+  dialect: string;
 };
 
 export type EntryResults = {

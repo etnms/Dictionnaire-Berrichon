@@ -58,7 +58,7 @@ const WordPage: React.FC<WordPage> = ({
                   pos={result.pos}
                   gloss={result.gloss}
                   definition={result.definition}
-                  key={result._id}
+                  dialect={result.dialect}
                 />
               ))}
             </ul>
