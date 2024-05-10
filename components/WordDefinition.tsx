@@ -37,7 +37,7 @@ const WordDefinition: React.FC<WordProps> = (props: WordProps) => {
           Définition: {props.definition}{" "}
         </p>
       )}
-      {props.dialect === "" ? null : (
+      {props.dialect === "" || props.dialect === null ? null : (
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
           Dialecte: {props.dialect}
         </p>
