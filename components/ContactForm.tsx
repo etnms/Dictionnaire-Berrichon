@@ -3,7 +3,8 @@ import React, { useState } from "react";
 const ContactForm: React.FC = () => {
   const [message, setMessage] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-
+  const [responseServer, setResponseServer] = useState<string>("");
+  const [colorResponseServer, setColorResponse] = useState<string>("");
   const sendInfo = async () => {
     try {
       const response = await fetch(
@@ -22,20 +23,26 @@ const ContactForm: React.FC = () => {
       );
 
       if (response.ok) {
-        console.log("Email sent successfully");
-        // Add logic here to handle success, such as showing a success message to the user
+        setColorResponse("text-green-500");
+        setResponseServer("Votre message a été envoyé !");
+        // Clear the fields
+        setMessage("");
+        setEmail("");
       } else {
-        console.error("Failed to send email");
-        // Add logic here to handle the failure, such as showing an error message to the user
+        setColorResponse("text-red-500");
+        setResponseServer("Erreur : votre message n'a pas pu être envoyé.");
       }
     } catch (error) {
-      console.error("Error sending email:", error);
+      setColorResponse("text-red-500");
+      setResponseServer("Erreur : votre message n'a pas pu être envoyé.");
     }
   };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    // Reset response message as there is a new input
+    setResponseServer("");
     const { name, value } = e.target;
     if (name === "message") {
       setMessage(value);
@@ -107,6 +114,9 @@ const ContactForm: React.FC = () => {
           Envoyer
         </button>
       </div>
+      {responseServer === "" ? null : (
+        <p className={colorResponseServer}>{responseServer}</p>
+      )}
     </form>
   );
 };

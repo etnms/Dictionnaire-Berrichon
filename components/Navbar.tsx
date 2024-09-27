@@ -69,7 +69,6 @@ const Navbar: React.FC = () => {
                 À propos
               </Link>
             </li>
-            {/* 
             <li>
               <Link
                 href="/contact"
@@ -77,7 +76,7 @@ const Navbar: React.FC = () => {
               >
                 Contact
               </Link>
-        </li> */}
+            </li>
           </ul>
         </div>
         <ToggleDarkModeBtn />
