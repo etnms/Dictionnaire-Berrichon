@@ -6,7 +6,13 @@ import WordPage from "../../components/WordPage";
 export default function Word(props: EntryResults) {
   const { entries, similarWords } = props;
 
-  return <WordPage entries={entries} languageDirection="francais-berrichon" />;
+  return (
+    <WordPage
+      entries={entries}
+      similarWords={similarWords}
+      languageDirection="francais-berrichon"
+    />
+  );
 }
 
 // Get props from server side rendering
@@ -14,12 +20,17 @@ export async function getServerSideProps(params: GetServerSidePropsContext) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API}/api/francais-berrichon/${params.query.word}` as string
   );
-
+  // Always check for similar words, even for empty results, to suggest to user
+  const similarWordsRes = await fetch(
+    `${process.env.NEXT_PUBLIC_API}/api/similarWords?word=${params.query.word}&lang=francais-berrichon` as string
+  );
+  const similarWords = await similarWordsRes.json();
   // If empty result (404 on api), send empty entries but similar words
   if (res.status === 404) {
     return {
       props: {
         entries: { words: [] },
+        similarWords,
       },
     };
     // Otherwise get the entries and return props
@@ -27,7 +38,7 @@ export async function getServerSideProps(params: GetServerSidePropsContext) {
     const entries = await res.json();
     // return props
     return {
-      props: { entries },
+      props: { entries, similarWords },
     };
   }
 }
