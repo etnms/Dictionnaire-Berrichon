@@ -1,41 +1,36 @@
-import type { NextPage } from "next";
+import type { NextPage, GetServerSideProps } from "next";
 import SearchBar from "../components/SearchBar";
 import WordDay from "../components/WordDay";
 import { useEffect, useState } from "react";
 import { Entry } from "../utils/types";
 import Navbar from "../components/Navbar";
 
-const Home: NextPage = () => {
+type HomeProps = {
+  serverWordOfTheDay: Entry;
+};
+
+const Home: NextPage<HomeProps> = ({ serverWordOfTheDay }) => {
   const [wordOfTheDay, setWordOfTheDay] = useState<Entry | null | undefined>(
     null
   );
 
   const today = new Date().toLocaleDateString();
 
-  // Word of the day logic
+  // Word of the day logic with localStorage caching
   useEffect(() => {
-    // Fetch the word of the day and update state
-    async function fetchWordOfTheDay() {
-      const res: Response = await fetch(
-        `${process.env.NEXT_PUBLIC_API}/api/word-day` as string
-      );
-      const word: Entry = await res.json();
-      // Update state and localStorage
-      setWordOfTheDay(word);
-      localStorage.setItem("wordDay", JSON.stringify(word));
-      localStorage.setItem("date", today);
-    }
-
     // Check if date or local storage is empty
     const wordDayStorage: string | null = localStorage.getItem("wordDay");
 
     if (localStorage.getItem("date") !== today || wordDayStorage === null) {
-      fetchWordOfTheDay();
+      // Use the server-fetched word
+      setWordOfTheDay(serverWordOfTheDay);
+      localStorage.setItem("wordDay", JSON.stringify(serverWordOfTheDay));
+      localStorage.setItem("date", today);
     } else {
       const object = JSON.parse(wordDayStorage);
       setWordOfTheDay(object);
     }
-  }, []);
+  }, [serverWordOfTheDay, today]);
 
   return (
     <>
@@ -51,6 +46,17 @@ const Home: NextPage = () => {
       </div>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/api/word-day`);
+  const serverWordOfTheDay = await res.json();
+
+  return {
+    props: {
+      serverWordOfTheDay,
+    },
+  };
 };
 
 export default Home;

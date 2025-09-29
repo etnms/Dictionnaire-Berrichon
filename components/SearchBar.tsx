@@ -147,9 +147,7 @@ const SearchBar: React.FC = () => {
     // pass the input value as a query parameter to filter the suggestions
     const debouncedFetch = debounce(
       (searchQuery: string) => {
-        fetch(
-          `${process.env.NEXT_PUBLIC_API}/api/suggestions?word=${searchQuery}&lang=${lang}`
-        )
+        fetch(`/api/suggestions?word=${searchQuery}&lang=${lang}`)
           .then((response) => response.json())
           .then((data) => {
             setSuggestions(data.suggestions);
