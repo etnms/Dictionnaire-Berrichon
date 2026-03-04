@@ -19,7 +19,10 @@ const WordSeeAlso: React.FC<WordSeeAlso> = ({
             key={word._id}
             className="py-2 px-4 ms-2 text-m rounded-lg text-gray-900 hover:text-blue-700 focus:z-10 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
           >
-            <Link href={`/${languageDirection}/${word.word}`}>{word.word}</Link>
+            {/* Link for see also is always "berrichon-francais" for the language direction.
+            It only shows berrichon words as they are the focus. If using "languageDirection" it
+            leads to errors trying to point to the French word pages with Berrichon words. */}
+            <Link href={`/berrichon-francais/${word.word}`}>{word.word}</Link>
           </li>
         ))}
       </ul>
