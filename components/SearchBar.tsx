@@ -77,7 +77,11 @@ const SearchBar: React.FC = () => {
       const trimmedValue = value.trim();
       if (!trimmedValue) return;
 
-      const targetPath = `/${lang}/${encodeURIComponent(trimmedValue)}`;
+      const targetPath = "/".concat(
+        lang,
+        "/",
+        encodeURIComponent(trimmedValue),
+      );
       if (router.asPath === targetPath) return;
 
       router.push(targetPath);
