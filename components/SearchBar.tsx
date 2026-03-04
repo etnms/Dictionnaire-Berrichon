@@ -73,9 +73,15 @@ const SearchBar: React.FC = () => {
 
   function searchWord(value: string) {
     if (lang === "berrichon-francais" || lang === "francais-berrichon") {
-      const safeValue = encodeURIComponent(value.trim());
-      router.push(`/${lang}/${safeValue}`);
-    } else return;
+      // trim to avoid xss issues
+      const trimmedValue = value.trim();
+      if (!trimmedValue) return;
+
+      const targetPath = `/${lang}/${encodeURIComponent(trimmedValue)}`;
+      if (router.asPath === targetPath) return;
+
+      router.push(targetPath);
+    }
   }
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
