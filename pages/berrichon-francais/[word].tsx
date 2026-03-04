@@ -16,12 +16,21 @@ export default function Word(props: EntryResults) {
 
 // Get props from server side rendering
 export async function getServerSideProps(params: GetServerSidePropsContext) {
+  const { word } = params.query;
+
+  // 1. Ensure word exists and is a string
+  if (!word || typeof word !== "string") {
+    return { notFound: true }; // Clean and simple!
+  }
+
+  // 2. Encode to prevent path traversal or SSRF
+  const safeWord = encodeURIComponent(word);
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/api/berrichon-francais/${params.query.word}` as string
+    `${process.env.NEXT_PUBLIC_API}/api/berrichon-francais/${safeWord}` as string,
   );
   // Always check for similar words, even for empty results, to suggest to user
   const similarWordsRes = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/api/similarWords?word=${params.query.word}&lang=berrichon-francais` as string
+    `${process.env.NEXT_PUBLIC_API}/api/similarWords?word=${params.query.word}&lang=berrichon-francais` as string,
   );
   const similarWords = await similarWordsRes.json();
   // If empty result (404 on api), send empty entries but similar words

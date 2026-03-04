@@ -43,7 +43,7 @@ const SearchBar: React.FC = () => {
 
   // Placeholder text that changes depending on screen size
   const [searchBarPlaceholder, setSearchBarPlaceholder] = useState<string>(
-    "Rechercher dans le dictionnaire"
+    "Rechercher dans le dictionnaire",
   );
 
   // Use effect to detect screen size and update placeholder text
@@ -72,9 +72,10 @@ const SearchBar: React.FC = () => {
   }
 
   function searchWord(value: string) {
-    if (lang === "berrichon-francais" || lang === "francais-berrichon")
-      router.push(`/${lang}/${value}`);
-    else return;
+    if (lang === "berrichon-francais" || lang === "francais-berrichon") {
+      const safeValue = encodeURIComponent(value.trim());
+      router.push(`/${lang}/${safeValue}`);
+    } else return;
   }
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
@@ -154,7 +155,7 @@ const SearchBar: React.FC = () => {
           });
       },
       DEBOUNCETIMEOUT,
-      LIMIT
+      LIMIT,
     );
     debouncedFetch(input);
   }, [input]);
@@ -162,7 +163,7 @@ const SearchBar: React.FC = () => {
   // Memoize results
   const memoizedSuggestions: string[] = useMemo(
     () => suggestions,
-    [suggestions]
+    [suggestions],
   );
 
   // Debounce input
