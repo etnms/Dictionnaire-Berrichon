@@ -72,20 +72,21 @@ const SearchBar: React.FC = () => {
   }
 
   function searchWord(value: string) {
-    if (lang === "berrichon-francais" || lang === "francais-berrichon") {
-      // trim to avoid xss issues
-      const trimmedValue = value.trim();
-      if (!trimmedValue) return;
+    if (lang !== "berrichon-francais" && lang !== "francais-berrichon") return;
 
-      const targetPath = "/".concat(
-        lang,
-        "/",
-        encodeURIComponent(trimmedValue),
-      );
-      if (router.asPath === targetPath) return;
+    // 1. Sanitize: Remove characters that could ever be interpreted as HTML/Script tags
+    // This replaces < > " ' and / with nothing.
+    const sanitizedValue = value.trim().replace(/[<>'"\\/]/g, "");
 
-      router.push(targetPath);
-    }
+    if (!sanitizedValue) return;
+
+    // 2. Build the path using standard string methods
+    const targetPath = "/" + lang + "/" + encodeURIComponent(sanitizedValue);
+
+    // 3. Avoid the invariant error
+    if (router.asPath === targetPath) return;
+
+    router.push(targetPath);
   }
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
